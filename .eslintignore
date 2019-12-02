@@ -1,0 +1,8 @@
+node_modules/
+package*.json
+*.css
+*.md
+*.png
+*.html
+*.ico
+*.txt
