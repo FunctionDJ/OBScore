@@ -2,6 +2,9 @@ import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
 import PlayerInfo from "./PlayerInfo"
 import ResetButtons from "./ResetButtons"
+import Round from "./Round"
+
+const x = () => [1, 2]
 
 export default function Players() {
   return (
@@ -15,6 +18,9 @@ export default function Players() {
         </Col>
         <Col>
           <PlayerInfo slot={1}/>
+        </Col>
+        <Col xs={1}>
+          <Round/>
         </Col>
       </Row>
     </Fragment>

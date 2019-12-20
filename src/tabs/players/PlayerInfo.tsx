@@ -1,7 +1,7 @@
 import React, {Fragment} from "react"
 
 import {useStore} from "laco-react"
-import PlayerStore from "../store"
+import PlayerStore from "../../store"
 
 import {
   Form,
@@ -12,7 +12,7 @@ import {
 import {FontAwesomeIcon as FAIcon} from "@fortawesome/react-fontawesome"
 import * as fa from "@fortawesome/free-solid-svg-icons"
 
-import characters from "./Characters.json"
+import characters from "../Characters.json"
 const chars = ["No Character", ...characters.sort()]
 
 const {Prepend, Text: IGText} = InputGroup

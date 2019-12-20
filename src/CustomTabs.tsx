@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React from "react"
 
 import FAButton from "./elements/FAButton"
 import * as fa from "@fortawesome/free-solid-svg-icons"
@@ -27,22 +27,20 @@ const Link = ({id, active = false, children}: LinkProps) => (
 
 export default function CustomTabs() {
   return (
-    <Fragment>
-      <nav>
-        <div className="nav nav-tabs">
-          <Link id="players" active={true}>Players</Link>
-          <Link id="meta">Meta</Link>
-          <FAButton
-            variant="success"
-            className="ml-auto mr-2 align-self-center px-3 py-0"
-            size="sm"
-            onClick={() => {}}
-          >
-            {fa.faSyncAlt}
-            Update
-          </FAButton>
-        </div>
-      </nav>
-    </Fragment>
+    <nav>
+      <div className="nav nav-tabs">
+        <Link id="players" active={true}>Players</Link>
+        <Link id="meta">Meta</Link>
+        <FAButton
+          variant="success"
+          className="ml-auto mr-2 align-self-center px-3 py-0"
+          size="sm"
+          onClick={() => {}}
+        >
+          {fa.faSyncAlt}
+          Update
+        </FAButton>
+      </div>
+    </nav>
   )
 }

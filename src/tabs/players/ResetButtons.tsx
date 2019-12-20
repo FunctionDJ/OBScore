@@ -1,10 +1,10 @@
 import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
-import FAButton from "../elements/FAButton"
+import FAButton from "../../elements/FAButton"
 import * as fa from "@fortawesome/free-solid-svg-icons"
-import "./ResetButtons.scss"
+import "./QuadButtons.scss"
 
-import Store from "../store"
+import Store from "../../store"
 
 type QuadButtonProps = {
   className: string,
