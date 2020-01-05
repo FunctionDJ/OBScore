@@ -26,6 +26,12 @@ $variablesPath: url("/node_modules/bootstrap/scss/_variables.scss");
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/darkly/bootswatch";
 
+.btn {
+  &:focus, &.focus {
+    box-shadow: none !important;
+  }
+}
+
 html {
-  overflow: hidden;
+  //overflow: hidden;
 }

@@ -6,6 +6,12 @@ import * as fa from "@fortawesome/free-solid-svg-icons"
 import "jquery"
 import "bootstrap"
 
+import socket from "./socket"
+import {emittable} from "./socketEvents"
+
+import {useStore} from "laco-react"
+import PlayerStore from "./store"
+
 type LinkProps = {
   id: string,
   active?: boolean,
@@ -26,6 +32,12 @@ const Link = ({id, active = false, children}: LinkProps) => (
 )
 
 export default function CustomTabs() {
+  const state = useStore(PlayerStore)
+
+  const update = () => {
+    socket.emit(emittable.updateWebSocket, state)
+  }
+
   return (
     <nav>
       <div className="nav nav-tabs">
@@ -35,7 +47,7 @@ export default function CustomTabs() {
           variant="success"
           className="ml-auto mr-2 align-self-center px-3 py-0"
           size="sm"
-          onClick={() => {}}
+          onClick={update}
         >
           {fa.faSyncAlt}
           Update

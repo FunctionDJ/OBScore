@@ -1,10 +1,11 @@
 import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
-import FAButton from "../../elements/FAButton"
+import FAButton from "../../../elements/FAButton"
 import * as fa from "@fortawesome/free-solid-svg-icons"
-import "./QuadButtons.scss"
+import "../QuadButtons.scss"
+import "./ResetButtons.scss"
 
-import Store from "../../store"
+import Store from "../../../store"
 
 type QuadButtonProps = {
   className: string,
@@ -13,7 +14,13 @@ type QuadButtonProps = {
 }
 
 const QuadButton = ({className, children, callback}: QuadButtonProps) => (
-  <FAButton variant="dark" size="sm" block className={className} onClick={callback}>
+  <FAButton
+    variant="dark"
+    size="sm"
+    block
+    className={className}
+    onClick={callback}
+  >
     {fa.faLongArrowAltLeft}
     {children}
     {fa.faLongArrowAltRight}

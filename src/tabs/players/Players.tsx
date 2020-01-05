@@ -1,10 +1,10 @@
 import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
 import PlayerInfo from "./PlayerInfo"
-import ResetButtons from "./ResetButtons"
-import Round from "./Round"
+import ResetButtons from "./resetbuttons/ResetButtons"
+import Level from "./level/Level"
 
-const x = () => [1, 2]
+import "./LevelSpacing.scss"
 
 export default function Players() {
   return (
@@ -19,8 +19,12 @@ export default function Players() {
         <Col>
           <PlayerInfo slot={1}/>
         </Col>
-        <Col xs={1}>
-          <Round/>
+        <Col
+          xs={1}
+          className="level-spacing"
+          style={{maxWidth: "none"}}
+        >
+          <Level/>
         </Col>
       </Row>
     </Fragment>

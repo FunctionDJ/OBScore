@@ -1,0 +1,9 @@
+$curve: cubic-bezier(0.025, 0.960, 0.330, 0.965);
+
+.btn {
+  transition: background-color 0.2s $curve;
+}
+
+.btn:active {
+  background-color: #007bff !important;
+}
