@@ -32,6 +32,8 @@ const Rounds = {
   } as Round
 } as const
 
+// TODO classMap() can be removed
+
 const classMap = (round: Round) => {
   switch (round) {
   case Rounds.midRound: return "top-left"

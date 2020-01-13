@@ -22,7 +22,7 @@ export default function Level() {
   const isMidRound = level.round === "midRound"
 
   const showRound = !isGrandFinals && !isCustom
-  const showNumber = isGrandFinals || isMidRound && !isCustom
+  const showNumber = (isGrandFinals || isMidRound) && !isCustom
 
   return (
     <Fragment>

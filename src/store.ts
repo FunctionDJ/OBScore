@@ -8,9 +8,9 @@ const init = {
   meta: {
     commentators: ["Commentator 1", "Commentator 2"],
     level: {
-      bracket: "custom",
+      bracket: "winners",
       round: "midRound",
-      number: ""
+      number: 0
     }
   }
 }
@@ -25,7 +25,7 @@ const emptyState = {
     level: {
       bracket: "",
       round: "",
-      number: ""
+      number: 0
     }
   }
 }
