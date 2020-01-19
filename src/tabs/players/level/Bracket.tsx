@@ -1,44 +1,44 @@
 import React, {Fragment} from "react"
 
 import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
-import "../QuadButtons.scss"
+import "../../../elements/BorderRadius.scss"
 
 import {useStore} from "laco-react"
 import Store from "../../../store"
 
-import CornerClass from "../../../elements/CornerClass"
+import BorderRadius from "../../../elements/BorderRadius"
 
 type Bracket = {
   code: string,
   short: string,
   long: string,
-  className: CornerClass
+  className: BorderRadius
 }
 
 const Brackets = {
   pools: {
     code: "pools", short: "P", long: "Pools",
-    className: CornerClass.topLeft
+    className: BorderRadius.topLeft
   } as Bracket,
   winners: {
     code: "winners", short: "W", long: "Winners",
-    className: CornerClass.none
+    className: BorderRadius.none
   } as Bracket,
   losers: {
     code: "losers", short: "L", long: "Losers",
-    className: CornerClass.none
+    className: BorderRadius.none
   } as Bracket,
   grandFinals: {
     code: "grand-finals", short: "GF", long: "Grand-Finals",
-    className: CornerClass.topRight
+    className: BorderRadius.topRight
   } as Bracket,
   custom: {
     code: "custom", short: "C", long: "Custom",
-    className: CornerClass.bottomRight
+    className: BorderRadius.bottomRight
   } as Bracket,
   roundRobin: {
     code: "round-robin", short: "RR", long: "Round Robin",
-    className: CornerClass.bottomLeft
+    className: BorderRadius.bottomLeft
   }
 } as const
 
@@ -47,7 +47,7 @@ export default function Bracket() {
 
   const changeBracket = ({target}) => {
     Store.set(state => {
-      state.meta.level.bracket = target.value
+      state.level.bracket = target.value
       return state
     })
   }
@@ -57,7 +57,7 @@ export default function Bracket() {
       <ToggleButton
         size="sm"
         value={bracket.code}
-        checked={state.meta.level.bracket === bracket.code}
+        checked={state.level.bracket === bracket.code}
         onChange={changeBracket}
         name="bracket"
         className={bracket.className}

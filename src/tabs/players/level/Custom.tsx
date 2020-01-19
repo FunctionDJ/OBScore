@@ -9,17 +9,18 @@ export default function Custom({style}: {style: any}) {
 
   const changeCustom = ({target}) => {
     Store.set(state => {
-      state.meta.level.custom = target.value
+      state.level.custom = target.value
       return state
     })
   }
 
   return (
     <FormControl
-      value={state.meta.level.custom}
+      value={state.level.custom}
       onChange={changeCustom}
       //size="sm"
       style={style}
+      as="textarea"
     />
   )
 }

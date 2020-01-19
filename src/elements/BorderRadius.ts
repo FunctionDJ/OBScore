@@ -1,4 +1,4 @@
-enum CornerClass {
+enum BorderRadius {
   topLeft = "top-left",
   topRight = "top-right",
   bottomLeft = "bottom-left",
@@ -6,4 +6,4 @@ enum CornerClass {
   none = "no-borders"
 }
 
-export default CornerClass
+export default BorderRadius

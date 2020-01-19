@@ -9,13 +9,15 @@ import Number from "./Number"
 import {useStore} from "laco-react"
 import Store from "../../../store"
 import Custom from "./Custom"
+import { CSSTransition } from "react-transition-group"
+import "./LevelComponentAnimations.scss"
 
 export default function Level() {
   const state = useStore(Store)
 
   // TODO export brackets, use them hese for comparison instead of direct strings
 
-  const level = state.meta.level
+  const level = state.level
 
   const isGrandFinals = level.bracket === "grand-finals"
   const isCustom = level.bracket === "custom"
@@ -27,18 +29,18 @@ export default function Level() {
   return (
     <Fragment>
       <Bracket/>
-      {showRound &&
+      <CSSTransition in={showRound} timeout={200} classNames="round-animation">
         <Round/>
-      }
-      {showNumber &&
+      </CSSTransition>
+      <CSSTransition in={showNumber} timeout={200} classNames="number-animation">
         <Number/>
-      }
-      {isCustom &&
+      </CSSTransition>
+      <CSSTransition in={isCustom} timeout={200} classNames="custom-animation">
         <Custom style={{
-          width: 200,
+          width: 150,
           height: "auto"
         }}/>
-      }
+      </CSSTransition>
     </Fragment>
   )
 }

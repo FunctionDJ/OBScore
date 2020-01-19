@@ -10,7 +10,7 @@ export default function Number() {
 
   const changeNumber = (number: number) => {
     Store.set(state => {
-      state.meta.level.number = number
+      state.level.number = number
       return state
     })
   }
@@ -18,16 +18,17 @@ export default function Number() {
   return (
     <Fragment>
       <NumberController
-        value={parseInt(state.meta.level.number, 10)}
-        min={0}
-        max={5}
+        defaultValue={1}
+        value={parseInt(state.level.number, 10)}
+        min={1}
+        max={9}
         onChange={changeNumber}
       />
       {
         /*
       <FormControl
         type="Number"
-        value={state.meta.level.number}
+        value={state.level.number}
         onChange={changeNumber}
         style={{
           minWidth: 200,

@@ -9,11 +9,12 @@ import * as fa from "@fortawesome/free-solid-svg-icons"
 interface FAButtonProps extends ButtonProps {
   children: [
     fa.IconDefinition,
-    any,
+    any?,
     fa.IconDefinition?
   ],
   className?: string,
-  onClick: any,
+  onClick?: any,
+  onMouseDown?: any,
   center?: boolean
 }
 
@@ -24,13 +25,15 @@ export default function FAButton(props: FAButtonProps) {
 
   const center = props.center || (!!props.children[2])
 
+  const hasCenterChild = !!props.children[1]
+
   let rightSide = <div></div>
 
   if (center) {
     if (props.children[2]) {
       rightSide = <FontAwesomeIcon
         icon={props.children[2]}
-        style={{marginLeft: "0.5rem"}}
+        style={hasCenterChild ? {marginLeft: "0.5rem"} : {}}
       />
     } else {
       rightSide = <div style={{
@@ -46,10 +49,10 @@ export default function FAButton(props: FAButtonProps) {
     <Button {...buttonProps}>
       <FontAwesomeIcon
         icon={props.children[0]}
-        style={{marginRight: "0.5rem"}}
+        style={hasCenterChild ? {marginRight: "0.5rem"} : {}}
       />
 
-      {props.children[1]}
+      {props.children[1] || ""}
 
       {rightSide}
     </Button>

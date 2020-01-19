@@ -4,31 +4,31 @@ import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
 import {useStore} from "laco-react"
 import Store from "../../../store"
 
-import CornerClass from "../../../elements/CornerClass"
+import BorderRadius from "../../../elements/BorderRadius"
 
 type Round = {
   code: string,
   short: string,
   long: string,
-  className: CornerClass
+  className: BorderRadius
 }
 
 const Rounds = {
   midRound: {
     code: "midRound", short: "R", long: "Round",
-    className: CornerClass.topLeft
+    className: BorderRadius.topLeft
   } as Round,
   quarters: {
     code: "quarters", short: "Q", long: "Quarters",
-    className: CornerClass.topRight
+    className: BorderRadius.topRight
   } as Round,
   semis: {
     code: "semis", short: "S", long: "Semis",
-    className: CornerClass.bottomLeft
+    className: BorderRadius.bottomLeft
   } as Round,
   finals: {
     code: "finals", short: "F", long: "Finals",
-    className: CornerClass.bottomRight
+    className: BorderRadius.bottomRight
   } as Round
 } as const
 
@@ -70,7 +70,7 @@ export default function Round() {
 
   const changeRound = ({target}) => {
     Store.set(state => {
-      state.meta.level.round = target.value
+      state.level.round = target.value
       return state
     })
   }
@@ -88,24 +88,24 @@ export default function Round() {
               <RoundToggleButton
                 round={Rounds.midRound}
                 onChange={changeRound}
-                checked={state.meta.level.round}
+                checked={state.level.round}
               />
               <RoundToggleButton
                 round={Rounds.quarters}
                 onChange={changeRound}
-                checked={state.meta.level.round}
+                checked={state.level.round}
               />
             </tr>
             <tr>
               <RoundToggleButton
                 round={Rounds.semis}
                 onChange={changeRound}
-                checked={state.meta.level.round}
+                checked={state.level.round}
               />
               <RoundToggleButton
                 round={Rounds.finals}
                 onChange={changeRound}
-                checked={state.meta.level.round}
+                checked={state.level.round}
               />
             </tr>
           </tbody>

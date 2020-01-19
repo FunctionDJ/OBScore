@@ -2,7 +2,7 @@ import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
 import FAButton from "../../../elements/FAButton"
 import * as fa from "@fortawesome/free-solid-svg-icons"
-import "../QuadButtons.scss"
+import "../../../elements/BorderRadius.scss"
 import "./ResetButtons.scss"
 
 import Store from "../../../store"

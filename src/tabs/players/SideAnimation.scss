@@ -1,0 +1,15 @@
+[class*=side-animation] {
+  transition: all 100ms ease-out;
+
+  &[class$=enter], &[class$=exit-done], &[class$=exit-active] {
+    opacity: 0;
+    width: 0;
+    transform: scaleX(0);
+  }
+
+  &[class$=enter-active], &[class$=exit], &[class$=enter-done] {
+    opacity: 1;
+    transform: scaleX(1);
+    width: 80px;
+  }
+}

@@ -25,6 +25,9 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "arrow-parens": "off",
+    "linebreak-style": "off",
+    "comma-dangle": "off",
     "indent": [
       "error",
       2
@@ -40,7 +43,17 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars":  ["error", {
       "args": "all"
-    }]
+    }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "import/no-unresolved": "off"
   },
   "settings": {
     "react": {

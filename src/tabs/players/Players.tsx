@@ -11,21 +11,20 @@ export default function Players() {
     <Fragment>
       <Row>
         <Col>
-          <PlayerInfo slot={0}/>
+          <PlayerInfo playerIndex={0}/>
         </Col>
-        <Col xs={2} className="d-flex flex-column">
+        <Col xs={2} className="p-0 d-flex flex-column">
           <ResetButtons/>
         </Col>
         <Col>
-          <PlayerInfo slot={1}/>
+          <PlayerInfo playerIndex={1} reverse={true}/>
         </Col>
-        <Col
-          xs={1}
+        <div
           className="level-spacing"
           style={{maxWidth: "none"}}
         >
           <Level/>
-        </Col>
+        </div>
       </Row>
     </Fragment>
   )

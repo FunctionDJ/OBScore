@@ -1,0 +1,53 @@
+[class*=round-animation] {
+  transition: all 100ms ease-out;
+
+  &[class$=enter], &[class$=exit-done], &[class$=exit-active] {
+    opacity: 0;
+    max-width: 0;
+    transform: scaleX(0);
+    margin-left: 0 !important;
+  }
+
+  &[class$=enter-active], &[class$=exit], &[class$=enter-done] {
+    opacity: 1;
+    transform: scaleX(1);
+    max-width: 60px;
+    margin-left: 1rem !important;
+  }
+}
+
+[class*=number-animation] {
+  transition: all 100ms ease-out;
+
+  &[class$=enter], &[class$=exit-done], &[class$=exit-active] {
+    opacity: 0;
+    max-width: 0;
+    transform: scaleX(0);
+    margin-left: 0 !important;
+  }
+
+  &[class$=enter-active], &[class$=exit], &[class$=enter-done] {
+    opacity: 1;
+    transform: scaleX(1);
+    max-width: 74px;
+    margin-left: 1rem !important;
+  }
+}
+
+[class*=custom-animation] {
+  transition: all 100ms ease-out;
+
+  &[class$=enter], &[class$=exit-done], &[class$=exit-active] {
+    opacity: 0;
+    max-width: 0;
+    transform: scaleX(0);
+    margin-left: 0 !important;
+  }
+
+  &[class$=enter-active], &[class$=exit], &[class$=enter-done] {
+    opacity: 1;
+    transform: scaleX(1);
+    max-width: 150px;
+    margin-left: 1rem !important;
+  }
+}
