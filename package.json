@@ -22,6 +22,7 @@
     "jquery": "^3.4.1",
     "laco": "^1.2.1",
     "laco-react": "^1.1.0",
+    "node-jquery": "^0.1.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
