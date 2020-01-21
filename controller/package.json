@@ -1,0 +1,64 @@
+{
+  "name": "obscore-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "@types/bootstrap": "^4.3.1",
+    "@types/jquery": "^3.3.31",
+    "@types/node": "^13.1.8",
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-transition-group": "^4.2.3",
+    "@types/socket.io-client": "^1.4.32",
+    "bootstrap": "^4.4.1",
+    "bootswatch": "^4.4.1",
+    "eslint": "^6.7.1",
+    "font-awesome": "^4.7.0",
+    "immer": "^5.0.0",
+    "jQuery": "^1.7.4",
+    "jquery": "^3.4.1",
+    "laco": "^1.2.1",
+    "laco-react": "^1.1.0",
+    "node-jquery": "^0.1.0",
+    "node-sass": "^4.13.0",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0",
+    "react-transition-group": "^4.3.0",
+    "reactn": "^2.2.4",
+    "socket.io": "^2.3.0",
+    "sprintf-js": "^1.1.2",
+    "typescript": "^3.7.2",
+    "uws": "^10.148.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.16.0",
+    "ts-node-dev": "^1.0.0-pre.44"
+  }
+}
