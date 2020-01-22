@@ -18,6 +18,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "paths": {
+      "*": [
+        "src/*",
+        "declarations/*"
+      ]
+    }
   },
   "include": [
     "src"

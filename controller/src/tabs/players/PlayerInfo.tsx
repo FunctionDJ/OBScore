@@ -1,6 +1,7 @@
 import React, {Fragment} from "react"
 
 import {useStore} from "laco-react"
+
 import PlayerStore from "../../store"
 
 import {
@@ -18,6 +19,8 @@ import Side from "./Side"
 
 import {CSSTransition} from "react-transition-group"
 import "./SideAnimation.scss"
+import { Store } from "laco"
+import Scoreboard from "../../model/Scoreboard"
 
 const chars = ["No Character", ...characters.sort()]
 
