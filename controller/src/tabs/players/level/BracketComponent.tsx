@@ -7,8 +7,9 @@ import {useStore} from "laco-react"
 import Store from "../../../store"
 
 import BorderRadius from "../../../elements/BorderRadius"
+import Scoreboard from "../../../model/Scoreboard"
 
-type Bracket = {
+type BracketComponent = {
   code: string,
   short: string,
   long: string,
@@ -19,23 +20,23 @@ const Brackets = {
   pools: {
     code: "pools", short: "P", long: "Pools",
     className: BorderRadius.topLeft
-  } as Bracket,
+  } as BracketComponent,
   winners: {
     code: "winners", short: "W", long: "Winners",
     className: BorderRadius.none
-  } as Bracket,
+  } as BracketComponent,
   losers: {
     code: "losers", short: "L", long: "Losers",
     className: BorderRadius.none
-  } as Bracket,
+  } as BracketComponent,
   grandFinals: {
     code: "grand-finals", short: "GF", long: "Grand-Finals",
     className: BorderRadius.topRight
-  } as Bracket,
+  } as BracketComponent,
   custom: {
     code: "custom", short: "C", long: "Custom",
     className: BorderRadius.bottomRight
-  } as Bracket,
+  } as BracketComponent,
   roundRobin: {
     code: "round-robin", short: "RR", long: "Round Robin",
     className: BorderRadius.bottomLeft
@@ -46,13 +47,13 @@ export default function Bracket() {
   const state = useStore(Store)
 
   const changeBracket = ({target}) => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       state.level.bracket = target.value
       return state
     })
   }
 
-  const BracketToggleButton = ({bracket}: {bracket: Bracket}) => (
+  const BracketToggleButton = ({bracket}: {bracket: BracketComponent}) => (
     <td>
       <ToggleButton
         size="sm"

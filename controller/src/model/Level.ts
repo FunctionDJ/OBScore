@@ -1,25 +1,13 @@
 import {sprintf} from "sprintf-js"
-
-enum Bracket {
-  pools,
-  winners,
-  losers,
-  grandFinals,
-  roundRobin,
-  custom
-}
-
-enum Round {
-  midRound,
-  quarters,
-  semis,
-  finals
-}
+import Bracket from "./Bracket"
+import Round from "./Round"
 
 export default class Level {
   bracket: Bracket
   round: Round
   template: string
+  custom?: string
+  number?: number
 
   toString() {
     try {

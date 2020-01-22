@@ -3,6 +3,8 @@ import { ButtonGroup, Button } from "react-bootstrap"
 
 import { useStore } from "laco-react"
 import Store from "../../store"
+import Scoreboard from "../../model/Scoreboard"
+import Side from "../../model/Side"
 
 function SideButton({
   value, active, onClick, label
@@ -36,15 +38,19 @@ function SideButton({
   )
 }
 
-export default function Side(
+export default function SideComponent(
   { playerIndex, style }:
   {playerIndex: number, style: CSSProperties}
 ) {
-  const { players } = useStore(Store)
+  const scoreboard: Scoreboard = useStore(Store)
+  const { players } = scoreboard
+
+  const player = players[playerIndex]
+
   const { side } = players[playerIndex]
 
   const handleOnClick = ({ target }) => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       const currentPlayer = state.players[playerIndex]
       const newSide = target.value
 
@@ -75,13 +81,13 @@ export default function Side(
   return (
     <ButtonGroup style={style}>
       <SideButton
-        active={side === "winners"}
+        active={side === Side.winners}
         label="W"
         onClick={handleOnClick}
         value="winners"
       />
       <SideButton
-        active={side === "losers"}
+        active={side === Side.losers}
         label="L"
         onClick={handleOnClick}
         value="losers"

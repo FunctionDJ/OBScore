@@ -6,6 +6,7 @@ import "../../../elements/BorderRadius.scss"
 import "./ResetButtons.scss"
 
 import Store from "../../../store"
+import Scoreboard from "../../../model/Scoreboard"
 
 type QuadButtonProps = {
   className: string,
@@ -29,7 +30,7 @@ const QuadButton = ({className, children, callback}: QuadButtonProps) => (
 
 export default function ResetButtons() {
   const switchNames = () => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       for (const key in state.players) {
         const index = parseInt(key)
 
@@ -48,7 +49,7 @@ export default function ResetButtons() {
   }
 
   const switchCharacters = () => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       for (const key in state.players) {
         const index = parseInt(key)
 
@@ -67,7 +68,7 @@ export default function ResetButtons() {
   }
 
   const switchAll = () => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       for (const key in state.players) {
         const index = parseInt(key)
 

@@ -11,6 +11,7 @@ import {emittable} from "./socketEvents"
 
 import {useStore} from "laco-react"
 import PlayerStore from "./store"
+import Scoreboard from "./model/Scoreboard"
 
 type LinkProps = {
   id: string,
@@ -32,7 +33,7 @@ const Link = ({id, active = false, children}: LinkProps) => (
 )
 
 export default function CustomTabs() {
-  const state = useStore(PlayerStore)
+  const state: Scoreboard = useStore(PlayerStore)
 
   const update = () => {
     socket.emit(emittable.updateWebSocket, state)

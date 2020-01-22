@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/waffln/obscore-react/issues"
   },
-  "homepage": "https://github.com/waffln/obscore-react#readme"
+  "homepage": "https://github.com/waffln/obscore-react#readme",
+  "devDependencies": {
+    "eslint-plugin-react": "^7.18.0"
+  }
 }

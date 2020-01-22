@@ -15,12 +15,13 @@ import * as fa from "@fortawesome/free-solid-svg-icons"
 
 import characters from "../Characters.json"
 import NumberController from "../../elements/NumberController"
-import Side from "./Side"
+import SideComponent from "./SideComponent"
 
 import {CSSTransition} from "react-transition-group"
 import "./SideAnimation.scss"
 import { Store } from "laco"
 import Scoreboard from "../../model/Scoreboard"
+import Bracket from "../../model/Bracket"
 
 const chars = ["No Character", ...characters.sort()]
 
@@ -35,36 +36,36 @@ export default function PlayerInfo(props: PlayerInfoProps) {
   const {playerIndex} = props
   const reverse = props.reverse || false
 
-  const generalState = useStore(PlayerStore)
+  const scoreboard: Scoreboard = useStore(PlayerStore)
 
-  const playerState = generalState.players[playerIndex]
+  const playerState = scoreboard.players[playerIndex]
 
   const changeSponsor = ({target}) => {
-    PlayerStore.set(state => {
+    PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].sponsor = target.value
       return state
     })
   }
 
   const changeName = ({target}) => {
-    PlayerStore.set(state => {
+    PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].name = target.value
     })
   }
 
   const changeCharacter = ({target}) => {
-    PlayerStore.set(state => {
+    PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].character = target.value
     })
   }
 
   const changeScore = newScore => {
-    PlayerStore.set(state => {
+    PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].score = newScore
     })
   }
 
-  const showSide = generalState.level.bracket === "grand-finals"
+  const showSide = scoreboard.level.bracket === Bracket.grandFinals
 
   return (
     <Fragment>
@@ -97,7 +98,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
               </Prepend>
               <Control
                 as="select"
-                value={playerState.character}
+                value={playerState.character.toString()}
                 onChange={changeCharacter}
               >
                 {chars.map(c => <option key={c}>{c}</option>)}
@@ -106,7 +107,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
             <CSSTransition in={showSide} timeout={200} classNames="side-animation">
               <div className="d-flex">
                 <div style={{width: 6}}/>
-                <Side style={{flex: 1}} playerIndex={playerIndex}/>
+                <SideComponent style={{flex: 1}} playerIndex={playerIndex}/>
               </div>
             </CSSTransition>
           </div>
@@ -118,7 +119,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
         />
         <NumberController
           defaultValue={0}
-          value={parseInt(playerState.score, 10)}
+          value={parseInt(playerState.score.toString(), 10)}
           max={5}
           min={0}
           onChange={changeScore}

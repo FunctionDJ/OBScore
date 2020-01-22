@@ -5,6 +5,7 @@ import {useStore} from "laco-react"
 import Store from "../../../store"
 
 import BorderRadius from "../../../elements/BorderRadius"
+import Scoreboard from "../../../model/Scoreboard"
 
 type Round = {
   code: string,
@@ -65,11 +66,11 @@ const RoundToggleButton = ({round, onChange, checked}: RoundToggleButtonProps) =
   </td>
 )
 
-export default function Round() {
+export default function RoundComponent() {
   const state = useStore(Store)
 
   const changeRound = ({target}) => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       state.level.round = target.value
       return state
     })

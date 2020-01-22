@@ -4,12 +4,13 @@ import {useStore} from "laco-react"
 import Store from "../../../store"
 
 import NumberController from "../../../elements/NumberController"
+import Scoreboard from "../../../model/Scoreboard"
 
 export default function Number() {
   const state = useStore(Store)
 
   const changeNumber = (number: number) => {
-    Store.set(state => {
+    Store.set((state: Scoreboard) => {
       state.level.number = number
       return state
     })
