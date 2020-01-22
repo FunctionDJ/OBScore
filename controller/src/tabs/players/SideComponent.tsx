@@ -45,8 +45,6 @@ export default function SideComponent(
   const scoreboard: Scoreboard = useStore(Store)
   const { players } = scoreboard
 
-  const player = players[playerIndex]
-
   const { side } = players[playerIndex]
 
   const handleOnClick = ({ target }) => {
@@ -56,7 +54,7 @@ export default function SideComponent(
 
       // toggle functionality
       if (currentPlayer.side === newSide) {
-        currentPlayer.side = ""
+        currentPlayer.side = undefined
         return state
       }
 
@@ -71,7 +69,7 @@ export default function SideComponent(
       const otherPlayer = state.players[otherPlayerIndex]
 
       if (newSide === "winners") {
-        otherPlayer.side = "losers"
+        otherPlayer.side = Side.losers
       }
 
       return state

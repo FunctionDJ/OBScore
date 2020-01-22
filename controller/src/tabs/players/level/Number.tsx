@@ -7,7 +7,7 @@ import NumberController from "../../../elements/NumberController"
 import Scoreboard from "../../../model/Scoreboard"
 
 export default function Number() {
-  const state = useStore(Store)
+  const scoreboard: Scoreboard = useStore(Store)
 
   const changeNumber = (number: number) => {
     Store.set((state: Scoreboard) => {
@@ -20,24 +20,11 @@ export default function Number() {
     <Fragment>
       <NumberController
         defaultValue={1}
-        value={parseInt(state.level.number, 10)}
+        value={scoreboard.level.number}
         min={1}
         max={9}
         onChange={changeNumber}
       />
-      {
-        /*
-      <FormControl
-        type="Number"
-        value={state.level.number}
-        onChange={changeNumber}
-        style={{
-          minWidth: 200,
-          textAlign: "center"
-        }}
-      />
-        */
-      }
     </Fragment>
   )
 }

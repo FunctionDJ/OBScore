@@ -19,7 +19,6 @@ import SideComponent from "./SideComponent"
 
 import {CSSTransition} from "react-transition-group"
 import "./SideAnimation.scss"
-import { Store } from "laco"
 import Scoreboard from "../../model/Scoreboard"
 import Bracket from "../../model/Bracket"
 
@@ -50,18 +49,21 @@ export default function PlayerInfo(props: PlayerInfoProps) {
   const changeName = ({target}) => {
     PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].name = target.value
+      return state
     })
   }
 
   const changeCharacter = ({target}) => {
     PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].character = target.value
+      return state
     })
   }
 
-  const changeScore = newScore => {
+  const changeScore = (newScore: number) => {
     PlayerStore.set((state: Scoreboard) => {
       state.players[playerIndex].score = newScore
+      return state
     })
   }
 
@@ -80,7 +82,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
             </Prepend>
             <Control
               style={{flex: 0.3}}
-              value={playerState.sponsor}
+              value={playerState.sponsor || ""}
               onChange={changeSponsor}
             />
             <div className="border border-light"/>
@@ -98,7 +100,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
               </Prepend>
               <Control
                 as="select"
-                value={playerState.character.toString()}
+                value={playerState.character ? playerState.character.toString() : "No Character"}
                 onChange={changeCharacter}
               >
                 {chars.map(c => <option key={c}>{c}</option>)}

@@ -3,6 +3,7 @@ import {receivable} from "./socketEvents"
 
 const socket = io("localhost:3001")
 
+socket.close()
 
 export default socket
 

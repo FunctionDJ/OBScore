@@ -11,6 +11,8 @@ import Store from "../../../store"
 import Custom from "./Custom"
 import { CSSTransition } from "react-transition-group"
 import "./LevelComponentAnimations.scss"
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Scoreboard from "../../../model/Scoreboard"
 import Bracket from "../../../model/Bracket"
 import Round from "../../../model/Round"
