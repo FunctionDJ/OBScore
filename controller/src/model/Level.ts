@@ -7,7 +7,7 @@ export default class Level {
   round: Round
   template: string
   custom?: string
-  number?: number
+  number = 1
 
   toString() {
     try {

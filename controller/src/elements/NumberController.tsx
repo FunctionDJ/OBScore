@@ -59,7 +59,9 @@ export default function NumberController(props: NumberControllerProps) {
             `${BorderRadius.topLeft} ${BorderRadius.bottomLeft}`
         }
         type="number"
-        value={value ? value.toString() : ""}
+        value={
+          (value === undefined || value === null) ? "" : value.toString()
+        }
         onChange={handleChange}
         min={min.toString()}
         max={max.toString()}

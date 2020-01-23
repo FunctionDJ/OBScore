@@ -5,13 +5,15 @@ import Level from "./model/Level"
 
 const scoreboard = new Scoreboard()
 
+const player1 = new Player("blub")
+player1.score = 0
+
+const player2 = new Player("bla")
+player2.score = 0
+
 scoreboard.players = [
-  new Player(
-    "blub"
-  ),
-  new Player(
-    "hi dude"
-  )
+  player1,
+  player2
 ]
 
 scoreboard.level = new Level()
