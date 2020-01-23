@@ -1,4 +1,4 @@
-enum Bracket {
+enum BracketType {
   pools,
   winners,
   losers,
@@ -7,4 +7,27 @@ enum Bracket {
   custom
 }
 
-export default Bracket
+class Bracket {
+  constructor(
+    readonly code: string,
+    readonly short: string,
+    readonly long: string,
+    readonly type: BracketType
+  ) {}
+}
+
+const Brackets = {
+  pools: new Bracket("pools", "P", "Pools", BracketType.pools),
+  winners: new Bracket("winners", "W", "Winners", BracketType.winners),
+  losers: new Bracket("losers", "L", "Losers", BracketType.losers),
+  grandFinals: new Bracket("grandFinals", "GF", "Grand-Finals", BracketType.grandFinals),
+  roundRobin: new Bracket("roundRobin", "RR", "Round Robin", BracketType.roundRobin),
+  custom: new Bracket("custom", "C", "Custom", BracketType.custom)
+} as const
+
+export default Brackets
+
+export {
+  BracketType as type,
+  Bracket as class
+}
