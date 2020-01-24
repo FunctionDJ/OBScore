@@ -1,3 +1,5 @@
+import RadioItem from "./RadioItem"
+
 enum BracketType {
   pools,
   winners,
@@ -7,14 +9,7 @@ enum BracketType {
   custom
 }
 
-class Bracket {
-  constructor(
-    readonly code: string,
-    readonly short: string,
-    readonly long: string,
-    readonly type: BracketType
-  ) {}
-}
+class Bracket extends RadioItem<BracketType> {}
 
 const Brackets = {
   pools: new Bracket("pools", "P", "Pools", BracketType.pools),

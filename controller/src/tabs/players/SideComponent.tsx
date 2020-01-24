@@ -50,7 +50,7 @@ export default function SideComponent(
   const handleOnClick = ({ target }) => {
     Store.set((state: Scoreboard) => {
       const currentPlayer = state.players[playerIndex]
-      const newSide = target.value
+      const newSide: Side = Side[target.value]
 
       // toggle functionality
       if (currentPlayer.side === newSide) {

@@ -1,6 +1,6 @@
 enum Side {
-  "winners",
-  "losers"
+  winners = "winners",
+  losers = "losers"
 }
 
 export default Side

@@ -7,58 +7,24 @@ import Store from "../../../store"
 import BorderRadius from "../../../elements/BorderRadius"
 import Scoreboard from "../../../model/Scoreboard"
 
-type Round = {
-  code: string,
-  short: string,
-  long: string,
-  className: BorderRadius
-}
-
-const Rounds = {
-  midRound: {
-    code: "midRound", short: "R", long: "Round",
-    className: BorderRadius.topLeft
-  } as Round,
-  quarters: {
-    code: "quarters", short: "Q", long: "Quarters",
-    className: BorderRadius.topRight
-  } as Round,
-  semis: {
-    code: "semis", short: "S", long: "Semis",
-    className: BorderRadius.bottomLeft
-  } as Round,
-  finals: {
-    code: "finals", short: "F", long: "Finals",
-    className: BorderRadius.bottomRight
-  } as Round
-} as const
-
-// TODO classMap() can be removed
-
-const classMap = (round: Round) => {
-  switch (round) {
-  case Rounds.midRound: return "top-left"
-  case Rounds.quarters: return "top-right"
-  case Rounds.semis: return "bottom-left"
-  case Rounds.finals: return "bottom-right"
-  }
-}
+import Rounds, {class as Round} from "../../../model/Round"
 
 type RoundToggleButtonProps = {
-  round: Round,
-  onChange: any,
-  checked: string
+  round: Round
+  className: string
+  onChange: any
+  currentRound: Round
 }
 
-const RoundToggleButton = ({round, onChange, checked}: RoundToggleButtonProps) => (
+const RoundToggleButton = ({round, className, onChange, currentRound}: RoundToggleButtonProps) => (
   <td>
     <ToggleButton
       size="sm"
       value={round.code}
-      checked={checked === round.code}
+      checked={currentRound === round}
       onChange={onChange}
       name="round"
-      className={classMap(round)}
+      className={className}
       type="radio" // important
     >
       {round.short}
@@ -67,11 +33,11 @@ const RoundToggleButton = ({round, onChange, checked}: RoundToggleButtonProps) =
 )
 
 export default function RoundComponent() {
-  const state = useStore(Store)
+  const scoreboard: Scoreboard = useStore(Store)
 
   const changeRound = ({target}) => {
     Store.set((state: Scoreboard) => {
-      state.level.round = target.value
+      state.level.round = Rounds[target.value]
       return state
     })
   }
@@ -88,25 +54,29 @@ export default function RoundComponent() {
             <tr>
               <RoundToggleButton
                 round={Rounds.midRound}
+                className={BorderRadius.topLeft}
                 onChange={changeRound}
-                checked={state.level.round}
+                currentRound={scoreboard.level.round}
               />
               <RoundToggleButton
                 round={Rounds.quarters}
+                className={BorderRadius.topRight}
                 onChange={changeRound}
-                checked={state.level.round}
+                currentRound={scoreboard.level.round}
               />
             </tr>
             <tr>
               <RoundToggleButton
                 round={Rounds.semis}
+                className={BorderRadius.bottomLeft}
                 onChange={changeRound}
-                checked={state.level.round}
+                currentRound={scoreboard.level.round}
               />
               <RoundToggleButton
                 round={Rounds.finals}
+                className={BorderRadius.bottomRight}
                 onChange={changeRound}
-                checked={state.level.round}
+                currentRound={scoreboard.level.round}
               />
             </tr>
           </tbody>

@@ -1,6 +1,6 @@
 import {sprintf} from "sprintf-js"
 import {class as Bracket} from "./Bracket"
-import Round from "./Round"
+import {class as Round} from "./Round"
 
 export default class Level {
   bracket: Bracket

@@ -14,20 +14,18 @@ import "./LevelComponentAnimations.scss"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Scoreboard from "../../../model/Scoreboard"
-import Bracket from "../../../model/Bracket"
-import Round from "../../../model/Round"
+import Brackets from "../../../model/Bracket"
+import Rounds from "../../../model/Round"
 
 export default function Level() {
 
   const Scoreboard: Scoreboard = useStore(Store)
 
-  // TODO export brackets, use them hese for comparison instead of direct strings
-
   const level = Scoreboard.level
 
-  const isGrandFinals = level.bracket === Bracket.pools
-  const isCustom = level.bracket === Bracket.custom
-  const isMidRound = level.round === Round.midRound
+  const isGrandFinals = level.bracket === Brackets.grandFinals
+  const isCustom = level.bracket === Brackets.custom
+  const isMidRound = level.round === Rounds.midRound
 
   const showRound = !isGrandFinals && !isCustom
   const showNumber = (isGrandFinals || isMidRound) && !isCustom
