@@ -3,8 +3,8 @@ import React from "react"
 import FAButton from "./elements/FAButton"
 import * as fa from "@fortawesome/free-solid-svg-icons"
 
-// import "jQuery"
-// import "bootstrap"
+import "bootstrap"
+import "jquery"
 
 import socket from "./socket"
 import {emittable} from "./socketEvents"
