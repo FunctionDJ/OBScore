@@ -1,4 +1,9 @@
 import { emittable, receivable } from "./events"
+import * as socketio from "socket.io"
+
+declare global {
+  interface Window {io: Function}
+}
 
 export default class OBS {
   private css: string = `
@@ -10,7 +15,7 @@ export default class OBS {
   private name: string
   private timeout: number
   private onUpdate: Function
-  private socket?: SocketIOClient.Socket
+  private socket?: socketio.Server
   private printedNotReady: boolean = true
 
   constructor(name: string, onUpdate: Function, timeout = 500) {
@@ -50,11 +55,11 @@ export default class OBS {
   }
 
   connect(server: string) {
-    if (typeof io !== "function")
+    if (typeof window.io !== "function")
       throw new Error("socket.io not found")
 
     /* global io */
-    const socket = io(server)
+    const socket = window.io(server)
     this.socket = socket
 
     socket.on(receivable.connect, () => {

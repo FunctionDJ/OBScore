@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React, {Fragment, useRef} from "react"
 import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
 
 import {useStore} from "laco-react"
@@ -16,21 +16,26 @@ type RoundToggleButtonProps = {
   currentRound: Round
 }
 
-const RoundToggleButton = ({round, className, onChange, currentRound}: RoundToggleButtonProps) => (
-  <td>
-    <ToggleButton
-      size="sm"
-      value={round.code}
-      checked={currentRound === round}
-      onChange={onChange}
-      name="round"
-      className={className}
-      type="radio" // important
-    >
-      {round.short}
-    </ToggleButton>
-  </td>
-)
+const RoundToggleButton = ({round, className, onChange, currentRound}: RoundToggleButtonProps) => {
+  const target = useRef(null)
+
+  return (
+    <td>
+      <ToggleButton
+        ref={target}
+        size="sm"
+        value={round.code}
+        checked={currentRound === round}
+        onChange={onChange}
+        name="round"
+        className={className}
+        type="radio" // important
+      >
+        {round.short}
+      </ToggleButton>
+    </td>
+  )
+}
 
 export default function RoundComponent() {
   const scoreboard: Scoreboard = useStore(Store)

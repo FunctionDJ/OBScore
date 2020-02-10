@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React from "react"
 
 import {useStore} from "laco-react"
 
@@ -21,6 +21,7 @@ import {CSSTransition} from "react-transition-group"
 import "./SideAnimation.scss"
 import Scoreboard from "../../model/Scoreboard"
 import Bracket from "../../model/Bracket"
+import SponsorTagInput from "../../elements/SponsorTagInput"
 
 const chars = ["No Character", ...characters.sort()]
 
@@ -46,9 +47,9 @@ export default function PlayerInfo(props: PlayerInfoProps) {
     })
   }
 
-  const changeName = ({target}) => {
+  const changeTag = ({target}) => {
     PlayerStore.set((state: Scoreboard) => {
-      state.players[playerIndex].name = target.value
+      state.players[playerIndex].tag = target.value
       return state
     })
   }
@@ -70,64 +71,53 @@ export default function PlayerInfo(props: PlayerInfoProps) {
   const showSide = scoreboard.level.bracket === Bracket.grandFinals
 
   return (
-    <Fragment>
-      <Form style={{
-        display: "flex",
-        flexDirection: reverse ? "row-reverse" : "row"
-      }}>
-        <div style={{flex: 1}}>
+    <Form style={{
+      display: "flex",
+      flexDirection: reverse ? "row-reverse" : "row"
+    }}>
+      <div style={{flex: 1}}>
+        <SponsorTagInput
+          sponsor={playerState.sponsor}
+          changeSponsor={changeSponsor}
+          tag={playerState.tag}
+          changeTag={changeTag}
+        />
+        <div className="d-flex align-items-center">
           <InputGroup size="sm">
             <Prepend>
-              <IGText><FAIcon icon={fa.faUser} fixedWidth/></IGText>
+              <IGText>
+                <FAIcon icon={fa.faHandPointer} fixedWidth/>
+              </IGText>
             </Prepend>
             <Control
-              style={{flex: 0.3}}
-              value={playerState.sponsor || ""}
-              onChange={changeSponsor}
-            />
-            <div className="border border-light"/>
-            <Control
-              value={playerState.name}
-              onChange={changeName}
-            />
+              as="select"
+              value={playerState.character ? playerState.character.toString() : "No Character"}
+              onChange={changeCharacter}
+            >
+              {chars.map(c => <option key={c}>{c}</option>)}
+            </Control>
           </InputGroup>
-          <div className="d-flex align-items-center">
-            <InputGroup size="sm">
-              <Prepend>
-                <IGText>
-                  <FAIcon icon={fa.faHandPointer} fixedWidth/>
-                </IGText>
-              </Prepend>
-              <Control
-                as="select"
-                value={playerState.character ? playerState.character.toString() : "No Character"}
-                onChange={changeCharacter}
-              >
-                {chars.map(c => <option key={c}>{c}</option>)}
-              </Control>
-            </InputGroup>
-            <CSSTransition in={showSide} timeout={200} classNames="side-animation">
-              <div className="d-flex">
-                <div style={{width: 6}}/>
-                <SideComponent style={{flex: 1}} playerIndex={playerIndex}/>
-              </div>
-            </CSSTransition>
-          </div>
+          <CSSTransition in={showSide} timeout={200} classNames="side-animation">
+            <div className="d-flex">
+              <div style={{width: 6}}/>
+              <SideComponent style={{flex: 1}} playerIndex={playerIndex}/>
+            </div>
+          </CSSTransition>
         </div>
-        <div
-          style={{
-            width: 10
-          }}
-        />
-        <NumberController
-          defaultValue={0}
-          value={parseInt(playerState.score.toString(), 10)}
-          max={5}
-          min={0}
-          onChange={changeScore}
-          reverse={reverse}
-        />
-      </Form>
-    </Fragment>
+      </div>
+      <div
+        style={{
+          width: 10
+        }}
+      />
+      <NumberController
+        defaultValue={0}
+        value={parseInt(playerState.score.toString(), 10)}
+        max={5}
+        min={0}
+        onChange={changeScore}
+        reverse={reverse}
+      />
+    </Form>
   )
 }

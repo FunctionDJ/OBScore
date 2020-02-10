@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react"
-import { ButtonGroup, Button } from "react-bootstrap"
+import { ButtonGroup, Button, Tooltip, OverlayTrigger } from "react-bootstrap"
 
 import { useStore } from "laco-react"
 import Store from "../../store"
@@ -7,34 +7,43 @@ import Scoreboard from "../../model/Scoreboard"
 import Side from "../../model/Side"
 
 function SideButton({
-  value, active, onClick, label
+  value, active, onClick, label, tooltip
 }: {
   value: string
   active: boolean,
   onClick: (Event) => void,
-  label: string
+  label: string,
+  tooltip: string
 }) {
   return (
-    <Button
-      size="sm"
-      value={value}
-      active={active}
-      onClick={onClick}
-      name="side"
-      style={{
-        paddingTop: 3,
-        paddingBottom: 3,
-        minWidth: 30
-      }}
-      onFocus={
-        // disable the annoying lingering focus visual behaviour
-        ({ currentTarget }) => {
-          currentTarget.blur()
-        }
+    <OverlayTrigger
+      overlay={
+        <Tooltip id={value}>
+          {tooltip}
+        </Tooltip>
       }
     >
-      {label}
-    </Button>
+      <Button
+        size="sm"
+        value={value}
+        active={active}
+        onClick={onClick}
+        name="side"
+        style={{
+          paddingTop: 3,
+          paddingBottom: 3,
+          minWidth: 30
+        }}
+        onFocus={
+          // disable the annoying lingering focus visual behaviour
+          ({ currentTarget }) => {
+            currentTarget.blur()
+          }
+        }
+      >
+        {label}
+      </Button>
+    </OverlayTrigger>
   )
 }
 
@@ -83,12 +92,14 @@ export default function SideComponent(
         label="W"
         onClick={handleOnClick}
         value="winners"
+        tooltip="Winners Side"
       />
       <SideButton
         active={side === Side.losers}
         label="L"
         onClick={handleOnClick}
         value="losers"
+        tooltip="Losers Side"
       />
     </ButtonGroup>
   )

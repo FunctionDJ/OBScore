@@ -5,7 +5,11 @@ import {useStore} from "laco-react"
 import Store from "../../../store"
 import Scoreboard from "../../../model/Scoreboard"
 
-export default function Custom({style}: {style: any}) {
+export default function Custom({
+  style, className
+}: {
+  style: any, className?: string
+}) {
   const state = useStore(Store)
 
   const changeCustom = ({target}) => {
@@ -17,6 +21,7 @@ export default function Custom({style}: {style: any}) {
 
   return (
     <FormControl
+      className={className ?? ""}
       value={state.level.custom}
       onChange={changeCustom}
       //size="sm"

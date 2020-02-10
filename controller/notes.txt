@@ -1,1 +1,4 @@
 BO5 / BO3 / Custom?
+Animationen sind irgendwie sequenziert, nicht parallel
+Persistenz im Speicher oder sowas
+Tooltips

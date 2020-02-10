@@ -1,0 +1,31 @@
+@mixin transition(
+  $classNames,
+  $transition,
+  $begin: (),
+  $end: ()
+) {
+  .#{$classNames}-enter,
+  .#{$classNames}-enter-done,
+  .#{$classNames}-exit-active,
+  .#{$classNames}-exit,
+  .#{$classNames}-exit-done,
+  .#{$classNames}-enter-active {
+    transition: #{$transition};
+  }
+  
+  .#{$classNames}-exit-active,
+  .#{$classNames}-exit-done,
+  .#{$classNames}-enter {
+    @each $p, $v in $begin {
+      #{$p}: $v;
+    }
+  }
+  
+  .#{$classNames}-enter-active,
+  .#{$classNames}-enter-done,
+  .#{$classNames}-exit {
+    @each $p, $v in $end {
+      #{$p}: $v;
+    }
+  }
+}

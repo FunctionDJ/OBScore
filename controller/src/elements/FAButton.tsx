@@ -15,7 +15,8 @@ interface FAButtonProps extends ButtonProps {
   className?: string,
   onClick?: any,
   onMouseDown?: any,
-  center?: boolean
+  center?: boolean,
+  style?: React.CSSProperties
 }
 
 export default function FAButton(props: FAButtonProps) {

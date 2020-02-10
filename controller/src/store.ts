@@ -2,6 +2,8 @@ import {Store} from "laco"
 import Scoreboard from "./model/Scoreboard"
 import Player from "./model/Player"
 import Level from "./model/Level"
+import Commentator from "./model/Commentator"
+import SetTypes from "./model/Set"
 
 const scoreboard = new Scoreboard()
 
@@ -16,9 +18,17 @@ scoreboard.players = [
   player2
 ]
 
+const commentator1 = new Commentator("bruh")
+const commentator2 = new Commentator("bromega")
+
+scoreboard.commentators = [
+  commentator1,
+  commentator2
+]
+
 scoreboard.level = new Level()
 
-scoreboard.bestOf = 3
+scoreboard.set = SetTypes.bo3
 
 const PlayerStore = new Store(scoreboard)
 

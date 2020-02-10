@@ -1,6 +1,6 @@
 export default class Attendee {
   constructor(
-    public name: string,
+    public tag: string,
     public sponsor?: string,
     public twitter?: string,
     public twitch?: string
@@ -9,7 +9,7 @@ export default class Attendee {
   toString() {
     return (
       this.sponsor ? `[${this.sponsor}] ` : ""
-      + this.name
+      + this.tag
     )
   }
 }

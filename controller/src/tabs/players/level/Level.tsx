@@ -21,7 +21,7 @@ export default function Level() {
 
   const Scoreboard: Scoreboard = useStore(Store)
 
-  const level = Scoreboard.level
+  const {level} = Scoreboard
 
   const isGrandFinals = level.bracket === Brackets.grandFinals
   const isCustom = level.bracket === Brackets.custom
@@ -40,7 +40,7 @@ export default function Level() {
         <Number/>
       </CSSTransition>
       <CSSTransition in={isCustom} timeout={200} classNames="custom-animation">
-        <Custom style={{
+        <Custom className="custom-animation-exit-done" style={{
           width: 150,
           height: "auto"
         }}/>

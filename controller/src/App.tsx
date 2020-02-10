@@ -12,10 +12,10 @@ export default function App() {
     <Fragment>
       <CustomTabs/>
       <div className="tab-content" id="nav-tabContent">
-        <TabContent id="players" active={true}>
+        <TabContent id="players" active={false}>
           <Players/>
         </TabContent>
-        <TabContent id="meta">
+        <TabContent id="meta" active={true}>
           <Meta/>
         </TabContent>
       </div>

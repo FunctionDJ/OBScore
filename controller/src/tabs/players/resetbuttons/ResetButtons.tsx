@@ -7,6 +7,8 @@ import "./ResetButtons.scss"
 
 import Store from "../../../store"
 import Scoreboard from "../../../model/Scoreboard"
+import Player from "../../../model/Player"
+import Level from "../../../model/Level"
 
 type QuadButtonProps = {
   className: string,
@@ -37,11 +39,11 @@ export default function ResetButtons() {
         if (index % 2 === 0)
           continue
 
-        const currentName = state.players[key].name
-        const otherName = state.players[index - 1].name
+        const currentName = state.players[key].tag
+        const otherName = state.players[index - 1].tag
 
-        state.players[index - 1].name = currentName
-        state.players[key].name = otherName
+        state.players[index - 1].tag = currentName
+        state.players[key].tag = otherName
       }
 
       return state
@@ -68,26 +70,35 @@ export default function ResetButtons() {
   }
 
   const switchAll = () => {
-    Store.set((state: Scoreboard) => {
-      for (const key in state.players) {
+    Store.set((scoreboard: Scoreboard) => {
+      for (const key in scoreboard.players) {
         const index = parseInt(key)
 
         if (index % 2 === 0)
           continue
 
-        const currentPlayer = state.players[key]
-        const otherPlayer = state.players[index - 1]
+        const currentPlayer = scoreboard.players[key]
+        const otherPlayer = scoreboard.players[index - 1]
 
-        state.players[index - 1] = currentPlayer
-        state.players[key] = otherPlayer
+        scoreboard.players[index - 1] = currentPlayer
+        scoreboard.players[key] = otherPlayer
       }
 
-      return state
+      return scoreboard
     })
   }
 
-  const reset = () => {
-    Store.reset()
+  const resetPlayersAndLevel = () => {
+    Store.set((scoreboard: Scoreboard) => {
+      scoreboard.players = [
+        new Player(""),
+        new Player("")
+      ]
+
+      scoreboard.level = new Level()
+
+      return scoreboard
+    })
   }
 
   return (
@@ -106,7 +117,7 @@ export default function ResetButtons() {
         </Col>
         <Col>
           {/*<QuadButton className="bottom-right" callback={reset}>Reset</QuadButton>*/}
-          <FAButton variant="dark" size="sm" block className="bottom-right" onClick={reset}>
+          <FAButton variant="dark" size="sm" block className="bottom-right" onClick={resetPlayersAndLevel}>
             {fa.faUndo}
             Reset
           </FAButton>

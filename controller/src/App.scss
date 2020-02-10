@@ -32,6 +32,13 @@ $variablesPath: url("/node_modules/bootstrap/scss/_variables.scss");
   }
 }
 
+.form-control:disabled {
+  // background-color: lighten($color: rgb(33, 37, 41), $amount: 10);
+  background-color: black;
+  color: grey;
+  cursor: not-allowed;
+}
+
 html {
-  //overflow: hidden;
+  overflow: hidden;
 }
