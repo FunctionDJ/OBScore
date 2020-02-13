@@ -1,9 +1,6 @@
 import { emittable, receivable } from "./events"
-import * as socketio from "socket.io"
-
-declare global {
-  interface Window {io: Function}
-}
+import Scoreboard from "../controller/src/model/Scoreboard"
+import io from "socket.io-client"
 
 export default class OBS {
   private css: string = `
@@ -14,11 +11,15 @@ export default class OBS {
 
   private name: string
   private timeout: number
-  private onUpdate: Function
-  private socket?: socketio.Server
+  private onUpdate: (scoreboard: Scoreboard) => void
+  private socket?: SocketIOClient.Socket
   private printedNotReady: boolean = true
 
-  constructor(name: string, onUpdate: Function, timeout = 500) {
+  constructor(
+    name: string,
+    onUpdate: (scoreboard: Scoreboard) => void,
+    timeout = 500
+  ) {
     if (typeof name !== "string")
       throw new Error("name must be a string")
 
@@ -48,34 +49,34 @@ export default class OBS {
   sendError(error: Error) {
     if (typeof this.socket !== "object") {
       throw new Error("Socket not available yet")
-      return
     }
 
     this.socket.emit(emittable.clientError, error.stack)
   }
 
-  connect(server: string) {
-    if (typeof window.io !== "function")
-      throw new Error("socket.io not found")
-
-    /* global io */
-    const socket = window.io(server)
+  connect(server: string, callback?: Function) {
+    const socket = io(server)
     this.socket = socket
 
-    socket.on(receivable.connect, () => {
+    socket.on(receivable.connect, (anything: any) => {
+      console.log(anything)
       this.log("Connected to OBScore-Host")
       socket.emit(emittable.introduce, this.name)
       socket.emit(emittable.gibData)
+
+      if (callback) {
+        callback()
+      }
     })
 
     socket.on(receivable.disconnect, () =>
       this.logError("OBScore-Host Disconnected")
     )
 
-    socket.on(receivable.update, (data: Object) => {
+    socket.on(receivable.update, (scoreboard: Scoreboard) => {
       this.log("Received update:")
-      console.log(data)
-      this.onUpdate(data)
+      console.log(scoreboard)
+      this.onUpdate(scoreboard)
       this.printedNotReady = false
     })
 

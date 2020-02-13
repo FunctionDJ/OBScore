@@ -33,9 +33,10 @@ ioSocket.on(receivable.global.connect, socket => {
     changeConfig(data, config)
   )
   
-  socket.on(receivable.global.introduce, name =>
+  socket.on(receivable.global.introduce, (name: string) => {
     nameTable[socket.id] = name
-  )
+    logDefault(`Client ${formatId(socket.id)} is now known as ${formatName(name)}`)
+  })
 
   socket.on(receivable.global.logDefault, msg =>
     socketLogDefault(msg, getName, socket)
