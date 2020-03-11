@@ -1,7 +1,14 @@
 import io from "socket.io"
 import chalk from "chalk"
 
-import config from "./config.json"
+let config = {}
+
+;(async () => {
+  try {
+    config = await import("./config.json")
+  } catch (error) {
+  }
+})()
 
 import {formatId, formatName, logDefault, LooseObject} from "./HelperFunctions"
 import { changeConfig, socketLogDefault, clientError, gibData, updateFiles } from "./SocketActions"

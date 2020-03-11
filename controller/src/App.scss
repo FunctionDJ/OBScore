@@ -7,7 +7,7 @@ $gray-400: #ced4da !default;
 $gray-500: #adb5bd !default;
 $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
-$gray-800: #343a40 !default;
+$gray-800: hsl(0, 0, 15%) !default;
 $gray-900: #212529 !default;
 
 $primary: #007bff;
@@ -41,4 +41,10 @@ $variablesPath: url("/node_modules/bootstrap/scss/_variables.scss");
 
 html {
   overflow: hidden;
+}
+
+body {
+  background-color: rgb(58,57,58);
+  font-family: "Segoe UI";
+  font-size: 12px;
 }

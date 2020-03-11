@@ -27,6 +27,9 @@ const Link = ({id, active = false, children}: LinkProps) => (
     href={`#nav-${id}`}
     role="tab"
     aria-controls={`nav-${id}`}
+    style={{
+      padding: "2px 5px"
+    }}
   >
     {children}
   </a>

@@ -97,7 +97,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
               {chars.map(c => <option key={c}>{c}</option>)}
             </Control>
           </InputGroup>
-          <CSSTransition in={showSide} timeout={200} classNames="side-animation">
+          <CSSTransition in={false} timeout={200} classNames="round-animation">
             <div className="d-flex">
               <div style={{width: 6}}/>
               <SideComponent style={{flex: 1}} playerIndex={playerIndex}/>

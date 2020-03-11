@@ -1,5 +1,8 @@
 import { emittable, receivable } from "./events"
 import Scoreboard from "../controller/src/model/Scoreboard"
+import Level from "../controller/src/model/Level"
+import Player from "../controller/src/model/Player"
+import Commentator from "../controller/src/model/Commentator"
 import io from "socket.io-client"
 
 export default class OBS {
@@ -20,14 +23,17 @@ export default class OBS {
     onUpdate: (scoreboard: Scoreboard) => void,
     timeout = 500
   ) {
-    if (typeof name !== "string")
+    if (typeof name !== "string") {
       throw new Error("name must be a string")
+    }
 
-    if (typeof onUpdate !== "function")
+    if (typeof onUpdate !== "function") {
       throw new Error("onUpdate must be a function")
+    }
 
-    if (typeof timeout !== "number")
+    if (typeof timeout !== "number") {
       throw new Error("timeout must be a number")
+    }
 
     this.name = name
     this.timeout = timeout
@@ -94,5 +100,37 @@ export default class OBS {
     window.addEventListener("error", event => {
       this.sendError(event.error)
     })
+  }
+
+  static stringifyLevel = (level: Level) => {
+    if (!level.bracket) {
+      return "n/a"
+    }
+  
+    if (!level.round) {
+      return level.bracket.long
+    }
+  
+    if (level.number) {
+      return `${level.bracket.long} ${level.round.long} ${level.number}`
+    } else {
+      return `${level.bracket.long} ${level.round.long}`
+    }
+  }
+
+  static stringifyPlayer = (player: Player) => {
+    if (!player.sponsor) {
+      return player.tag
+    }
+  
+    return `${player.sponsor} | ${player.tag}`
+  }
+
+  static stringifyCommentator = (commentator: Commentator) => {
+    if (!commentator.sponsor) {
+      return commentator.tag
+    }
+
+    return `${commentator.sponsor} | ${commentator.tag}`
   }
 }
