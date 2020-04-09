@@ -5,7 +5,12 @@ import Player from "../controller/src/model/Player"
 import Commentator from "../controller/src/model/Commentator"
 import io from "socket.io-client"
 
-export default class OBS {
+enum Direction {
+  in,
+  out
+}
+
+export default class OBScoreClient {
   private css: string = `
     background: #16171d;
     padding: 0px 5px;
@@ -40,19 +45,19 @@ export default class OBS {
     this.onUpdate = onUpdate
   }
 
-  logBase(msg: string, style: any) {
+  private logBase(msg: string, style: any) {
     console.log(`%c[OBScore.js] ${msg}`, style)
   }
 
-  log(msg: string) {
+  public log(msg: string) {
     this.logBase(msg, this.css + "color: #3b8eea;")
   }
 
-  logError(msg: string) {
+  public logError(msg: string) {
     this.logBase(msg, this.css + "color: #f13d30;")
   }
 
-  sendError(error: Error) {
+  public sendError(error: Error) {
     if (typeof this.socket !== "object") {
       throw new Error("Socket not available yet")
     }
@@ -60,7 +65,7 @@ export default class OBS {
     this.socket.emit(emittable.clientError, error.stack)
   }
 
-  connect(server: string, callback?: Function) {
+  public connect(server: string, callback?: Function) {
     const socket = io(server)
     this.socket = socket
 
@@ -102,7 +107,7 @@ export default class OBS {
     })
   }
 
-  static stringifyLevel = (level: Level) => {
+  public static stringifyLevel = (level: Level) => {
     if (!level.bracket) {
       return "n/a"
     }
@@ -118,7 +123,7 @@ export default class OBS {
     }
   }
 
-  static stringifyPlayer = (player: Player) => {
+  public static stringifyPlayer = (player: Player) => {
     if (!player.sponsor) {
       return player.tag
     }
@@ -126,11 +131,35 @@ export default class OBS {
     return `${player.sponsor} | ${player.tag}`
   }
 
-  static stringifyCommentator = (commentator: Commentator) => {
+  public static stringifyCommentator = (commentator: Commentator) => {
     if (!commentator.sponsor) {
       return commentator.tag
     }
 
     return `${commentator.sponsor} | ${commentator.tag}`
+  }
+
+  private static fade = (element: HTMLElement, direction: Direction) => {
+    const animation = element.animate({
+      opacity: direction === Direction.in ? [1, 0] : [0, 1]
+    }, 300)
+
+    return new Promise(res => {
+      animation.addEventListener("finish", res)
+    })
+  }
+
+  public static fadeIn = async (element: HTMLElement) => {
+    await OBScoreClient.fade(element, Direction.out)
+  }
+
+  public static fadeOut = async (element: HTMLElement) => {
+    await OBScoreClient.fade(element, Direction.in)
+  }
+
+  public static fadeInOut = async (element: HTMLElement, changeMethod: Function) => {
+    await OBScoreClient.fadeOut(element)
+    changeMethod()
+    await OBScoreClient.fadeIn(element)
   }
 }
