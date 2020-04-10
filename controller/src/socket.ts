@@ -1,7 +1,7 @@
 import io from "socket.io-client"
 import {receivable} from "./socketEvents"
 
-const socket = io("192.168.0.55:3001")
+const socket = io("http://localhost:3001")
 
 // socket.close()
 

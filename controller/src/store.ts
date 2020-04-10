@@ -7,10 +7,10 @@ import SetTypes from "./model/Set"
 
 const scoreboard = new Scoreboard()
 
-const player1 = new Player("blub")
+const player1 = new Player("Player 1")
 player1.score = 0
 
-const player2 = new Player("bla")
+const player2 = new Player("Player 2")
 player2.score = 0
 
 scoreboard.players = [
@@ -18,8 +18,8 @@ scoreboard.players = [
   player2
 ]
 
-const commentator1 = new Commentator("bruh")
-const commentator2 = new Commentator("bromega")
+const commentator1 = new Commentator("Commentator 1")
+const commentator2 = new Commentator("Commentator 2")
 
 scoreboard.commentators = [
   commentator1,

@@ -61,5 +61,5 @@ document.addEventListener("DOMContentLoaded", function() {
   })
 
   // Connect to the host!
-  obscoreClient.connect("ws://192.168.0.55:3001")
+  obscoreClient.connect("ws://localhost:3001")
 })

@@ -163,3 +163,5 @@ export default class OBScoreClient {
     await OBScoreClient.fadeIn(element)
   }
 }
+
+window.OBScoreClient = OBScoreClient
