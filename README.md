@@ -2,7 +2,7 @@
 
 ![Screenshot of OBScore](https://i.imgur.com/ba5i6ih.png)
 <p align="center">
-  <a href="releases">
+  <a href="https://github.com/waffln/OBScore/releases/latest">
     <img
       alt="GitHub release (latest by date including pre-releases)"
       src="https://img.shields.io/github/v/release/waffln/obscore-react?include_prereleases&style=for-the-badge"
@@ -23,7 +23,7 @@ OBScore currently ships with one template scoreboard, more will come later.
 
 ## Installation
 
-Download the latest [release](releases) and unzip it.
+Download the latest [release](https://github.com/waffln/OBScore/releases/latest) and unzip it.
 
 ## Usage
 
