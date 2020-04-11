@@ -3,6 +3,7 @@
 ![Screenshot of OBScore](https://i.imgur.com/ba5i6ih.png)
 <p align="center">
   <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/waffln/obscore-react?include_prereleases">
+  <img alt="Discord" src="https://img.shields.io/discord/553557935289270293">
 </p>
 
 OBScore is a modular scoreboard controller for setting player tags / names, scores, characters, round and much more.
