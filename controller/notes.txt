@@ -1,6 +1,0 @@
-Animationen sind irgendwie sequenziert, nicht parallel
-Persistenz im Speicher oder sowas
-Tooltips
-
-Wenn man eine Rundenzahl einstellt, aber danach zB auf Quarters wechselt, bleibt die Zahl (Client? Statische Stringify Methode?)
-stringifySet methode, die custom berücksichtigt
