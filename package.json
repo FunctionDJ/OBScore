@@ -2,23 +2,25 @@
   "name": "obscore",
   "version": "0.1.0",
   "description": "A platform fighter scoreboard controller",
-  "main": " ",
   "scripts": {
-    "controller": "cd controller && npm start"
+    "client": "cd client && npm start",
+    "controller": "cd controller && npm start",
+    "host": "cd host && npm start",
+    "install": "npm install --no-optional && cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
+    "build": "cd client && npm run build && cd ../controller && npm run build && cd ../host && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waffln/obscore-react.git"
+    "url": "git+https://github.com/waffln/OBScore.git"
   },
   "author": "waffeln",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/waffln/obscore-react/issues"
+    "url": "https://github.com/waffln/OBScore/issues"
   },
-  "homepage": "https://github.com/waffln/obscore-react#readme",
+  "homepage": "https://github.com/waffln/OBScore",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "eslint-plugin-react": "^7.18.0",
     "typescript": "^3.7.5"
   }
 }

@@ -1,0 +1,4 @@
+/node_modules/
+
+# Create-React-App TEMPORARY Build Folder (gets moved to root/build/controller/)
+/build/

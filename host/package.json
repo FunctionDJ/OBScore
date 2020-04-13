@@ -1,17 +1,15 @@
 {
-  "name": "host",
-  "version": "0.0.1",
-  "description": "",
+  "name": "obscore-host",
   "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node main.ts",
+    "build": "pkg main.ts --out-path ../build/host/"
   },
-  "author": "waffeln",
-  "license": "ISC",
   "dependencies": {
     "@types/chalk": "^2.2.0",
     "@types/socket.io": "^2.1.4",
     "chalk": "^3.0.0",
+    "pkg": "^4.4.7",
     "socket.io": "^2.3.0"
   }
 }
