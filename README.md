@@ -38,41 +38,20 @@ What you need:
 
 - [NodeJS](https://nodejs.org/) (comes with NPM)
 
-### Controller
-
 Setup:
 
 ```sh
-cd controller
-npm install
+npm run install-all
 ```
 
-Run for development: `npm run start` (from `/controller/`) or `npm run controller` (from repository root)
+**Not the same as `npm install`!**
 
-Build for production: `npm run build` (from `/controller/`)
+This command runs `npm install` for client, controller and host.
 
-### Host
-
-Setup:
+Build all:
 
 ```sh
-cd host
-npm install
+npm run build
 ```
 
-Run for development: `ts-node main.ts` (from `/host/`, requires `npm i -g ts-node`)
-
-Build for production: `pkg main.ts` (from `/host/`, requires `npm i -g pkg`)
-
-### Client (script file for scoreboards)
-
-Setup:
-
-```sh
-cd client
-npm install
-```
-
-Run for development: `parcel index.html` (from `/client/`, requires `npm i -g parcel`)
-
-Build for production: `parcel build index.html` (from `/client/`, requires `npm i -g parcel`)
+To run or build invididual parts, `cd` into the folder and run `npm start` or `npm run build`.
