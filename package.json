@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/waffln/obscore-react#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
     "eslint-plugin-react": "^7.18.0",
     "typescript": "^3.7.5"
   }
