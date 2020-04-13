@@ -39,7 +39,7 @@ export default function CustomTabs() {
   const state: Scoreboard = useStore(PlayerStore)
 
   const update = () => {
-    socket.emit(emittable.updateWebSocket, state)
+    socket.emit(emittable.updateWebSocket, Scoreboard.getExport(state))
   }
 
   return (

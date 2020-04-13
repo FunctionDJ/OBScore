@@ -9,6 +9,8 @@ import Store from "../../../store"
 import Scoreboard from "../../../model/Scoreboard"
 import Player from "../../../model/Player"
 import Level from "../../../model/Level"
+import Brackets from "../../../model/Bracket"
+import Rounds from "../../../model/Round"
 
 type QuadButtonProps = {
   className: string,
@@ -95,7 +97,10 @@ export default function ResetButtons() {
         new Player("")
       ]
 
-      scoreboard.level = new Level()
+      scoreboard.level = new Level(
+        Brackets.pools,
+        Rounds.midRound
+      )
 
       return scoreboard
     })

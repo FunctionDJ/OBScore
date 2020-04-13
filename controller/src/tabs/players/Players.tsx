@@ -2,7 +2,7 @@ import React, {Fragment} from "react"
 import {Row, Col} from "react-bootstrap"
 import PlayerInfo from "./PlayerInfo"
 import ResetButtons from "./resetbuttons/ResetButtons"
-import Level from "./level/Level"
+import LevelComponent from "./level/Level"
 
 import "./LevelSpacing.scss"
 
@@ -23,7 +23,7 @@ export default function Players() {
           className="level-spacing"
           style={{maxWidth: "none"}}
         >
-          <Level/>
+          <LevelComponent/>
         </div>
       </Row>
     </Fragment>

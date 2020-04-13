@@ -116,7 +116,7 @@ export default class OBScoreClient {
       return level.bracket.long
     }
   
-    if (level.number) {
+    if (level.number !== undefined) {
       return `${level.bracket.long} ${level.round.long} ${level.number}`
     } else {
       return `${level.bracket.long} ${level.round.long}`

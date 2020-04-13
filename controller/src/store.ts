@@ -5,6 +5,9 @@ import Level from "./model/Level"
 import Commentator from "./model/Commentator"
 import SetTypes from "./model/Set"
 
+import Brackets from "./model/Bracket"
+import Rounds from "./model/Round"
+
 const scoreboard = new Scoreboard()
 
 const player1 = new Player("Player 1")
@@ -26,7 +29,10 @@ scoreboard.commentators = [
   commentator2
 ]
 
-scoreboard.level = new Level()
+scoreboard.level = new Level(
+  Brackets.pools,
+  Rounds.midRound
+)
 
 scoreboard.set = SetTypes.bo3
 

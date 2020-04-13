@@ -11,35 +11,27 @@ import Store from "../../../store"
 import Custom from "./Custom"
 import { CSSTransition } from "react-transition-group"
 import "./LevelComponentAnimations.scss"
+import Level from "../../../model/Level"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Scoreboard from "../../../model/Scoreboard"
-import Brackets from "../../../model/Bracket"
-import Rounds from "../../../model/Round"
 
-export default function Level() {
+export default function LevelComponent() {
 
   const Scoreboard: Scoreboard = useStore(Store)
 
   const {level} = Scoreboard
 
-  const isGrandFinals = level.bracket === Brackets.grandFinals
-  const isCustom = level.bracket === Brackets.custom
-  const isMidRound = level.round === Rounds.midRound
-
-  const showRound = !isGrandFinals && !isCustom
-  const showNumber = (isGrandFinals || isMidRound) && !isCustom
-
   return (
     <Fragment>
       <BracketComponent/>
-      <CSSTransition in={showRound} timeout={200} classNames="round-animation">
+      <CSSTransition in={Level.shouldShowRound(level)} timeout={200} classNames="round-animation">
         <RoundComponent/>
       </CSSTransition>
-      <CSSTransition in={showNumber} timeout={200} classNames="number-animation">
+      <CSSTransition in={Level.shouldShowNumber(level)} timeout={200} classNames="number-animation">
         <Number/>
       </CSSTransition>
-      <CSSTransition in={isCustom} timeout={200} classNames="custom-animation">
+      <CSSTransition in={Level.isCustom(level)} timeout={200} classNames="custom-animation">
         <Custom className="custom-animation-exit-done" style={{
           width: 150,
           height: "auto"
