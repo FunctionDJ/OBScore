@@ -6,21 +6,15 @@
     "client": "cd client && npm start",
     "controller": "cd controller && npm start",
     "host": "cd host && npm start",
-    "install": "npm install --no-optional && cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
+    "install-all": "cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
     "build": "cd client && npm run build && cd ../controller && npm run build && cd ../host && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waffln/OBScore.git"
+    "url": "github:waffln/OBScore"
   },
   "author": "waffeln",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/waffln/OBScore/issues"
-  },
-  "homepage": "https://github.com/waffln/OBScore",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "typescript": "^3.7.5"
-  }
+  "bugs": "https://github.com/waffln/OBScore/issues",
+  "homepage": "https://github.com/waffln/OBScore"
 }
