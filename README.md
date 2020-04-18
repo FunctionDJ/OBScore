@@ -41,12 +41,8 @@ What you need:
 Setup:
 
 ```sh
-npm run install-all
+npm install
 ```
-
-**Not the same as `npm install`!**
-
-This command runs `npm install` for client, controller and host.
 
 Build all:
 

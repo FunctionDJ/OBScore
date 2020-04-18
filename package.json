@@ -6,7 +6,8 @@
     "client": "cd client && npm start",
     "controller": "cd controller && npm start",
     "host": "cd host && npm start",
-    "install-all": "cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
+    "install": "cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
+    "ci-all": "cd client && npm ci && cd ../controller && npm ci && cd ../host && npm ci",
     "build": "cd client && npm run build && cd ../controller && npm run build && cd ../host && npm run build"
   },
   "repository": {
