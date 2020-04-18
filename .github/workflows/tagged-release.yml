@@ -33,5 +33,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: "latest"
           prerelease: true 
-          files: ./build/OBScore-Release.zip
+          files: ./OBScore-Release.zip
           
