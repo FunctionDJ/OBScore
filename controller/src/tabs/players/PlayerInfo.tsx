@@ -20,7 +20,6 @@ import SideComponent from "./SideComponent"
 import {CSSTransition} from "react-transition-group"
 import "./SideAnimation.scss"
 import Scoreboard from "../../model/Scoreboard"
-import Bracket from "../../model/Bracket"
 import SponsorTagInput from "../../elements/SponsorTagInput"
 
 const chars = ["No Character", ...characters.sort()]
