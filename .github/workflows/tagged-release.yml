@@ -30,7 +30,7 @@ jobs:
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true 
           files: ./build/OBScore-Release.zip
           
