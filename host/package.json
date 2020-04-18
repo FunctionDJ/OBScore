@@ -1,15 +1,18 @@
 {
   "name": "obscore-host",
-  "main": "main.ts",
   "scripts": {
     "start": "ts-node main.ts",
-    "build": "pkg main.ts --out-path ../build/host/"
+    "build": "parcel build main.ts --target node && pkg dist/main.js --out-path ../build/host/",
+    "postbuild": "rm -rf ./dist/"
   },
   "dependencies": {
     "@types/chalk": "^2.2.0",
     "@types/socket.io": "^2.1.4",
     "chalk": "^3.0.0",
-    "pkg": "^4.4.7",
-    "socket.io": "^2.3.0"
+    "parcel-bundler": "^1.12.4",
+    "pkg": "^4.4.7"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
   }
 }

@@ -1,1 +1,9 @@
 /node_modules/
+
+# temporary parcel files (gets emptied after every build)
+# this is only here so nobody accidentially
+# commits these files when the build process gets interrupted or fails
+/dist/
+
+# parcel cache (does not get emptied)
+/.cache/
