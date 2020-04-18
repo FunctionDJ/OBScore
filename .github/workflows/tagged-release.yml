@@ -1,0 +1,35 @@
+name: tagged-release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  gh_tagged_release:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: NPM clean install
+        run: npm ci
+
+      - name: Generate build files
+        run: npm run build
+
+      - name: Zip build files
+        run: zip -r OBScore-Release.zip ./build/
+
+      - name: Automatic Releases
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          prerelease: true 
+          files: ./build/OBScore-Release.zip
+          
