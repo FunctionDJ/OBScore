@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 12
 
-      - name: NPM clean install
-        run: npm ci
+      - name: NPM clean install-all
+        run: npm run install-all
 
       - name: Generate build files
         run: npm run build
