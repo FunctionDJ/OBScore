@@ -68,7 +68,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
     })
   }
 
-  const showSide = scoreboard.level.bracket === Bracket.grandFinals
+  // const showSide = scoreboard.level.bracket === Bracket.grandFinals
 
   return (
     <Form style={{
