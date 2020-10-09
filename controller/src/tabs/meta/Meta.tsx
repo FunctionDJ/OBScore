@@ -6,11 +6,14 @@ import Store from "../../store"
 import Scoreboard from "../../model/Scoreboard"
 
 import * as fa from "@fortawesome/free-solid-svg-icons"
-import { Row, Col} from "react-bootstrap"
+import { Row, Col, Form} from "react-bootstrap"
 import Commentator from "../../model/Commentator"
 import SetComponent from "./SetComponent"
 
+import {useStore} from "laco-react"
+
 export default function Meta() {
+  const scoreboard: Scoreboard = useStore(Store)
 
   const switchAll = () => {
     Store.set((state: Scoreboard) => {
@@ -42,6 +45,20 @@ export default function Meta() {
     })
   }
 
+  const changeTitle = ({target}) => {
+    Store.set((state: Scoreboard) => {
+      state.title = target.value
+      return state
+    })
+  }
+
+  const changeBracketURL = ({target}) => {
+    Store.set((state: Scoreboard) => {
+      state.bracketURL = target.value
+      return state
+    })
+  }
+
   return (
     <Fragment>
       <Row>
@@ -70,6 +87,20 @@ export default function Meta() {
         </Col>
         <Col>
           <CommentatorInfo slot={1}/>
+        </Col>
+        <Col xs={3}>
+          <Form.Control
+            size="sm"
+            placeholder="Stream Title"
+            value={scoreboard.title}
+            onChange={changeTitle}
+          />
+          <Form.Control
+            size="sm"
+            placeholder="Bracket URL"
+            value={scoreboard.bracketURL}
+            onChange={changeBracketURL}
+          />
         </Col>
       </Row>
     </Fragment>
