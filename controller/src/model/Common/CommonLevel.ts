@@ -13,6 +13,9 @@ export default abstract class CommonLevel {
     round: Round,
   ) {
     this.bracket = bracket
-    this.round = round
+
+    if (bracket && bracket.code !== "grandFinals") {
+      this.round = round
+    }
   }
 }
