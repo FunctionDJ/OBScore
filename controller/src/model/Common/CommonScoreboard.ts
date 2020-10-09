@@ -6,6 +6,8 @@ import {class as Set} from "../Set"
 import SetExport from "../Export/SetExport"
 
 export default interface CommonScoreboard {
+  title: string
+  bracketURL: string
   players: Player[]
   commentators: Commentator[]
   level: LevelExport|Level

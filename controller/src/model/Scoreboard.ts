@@ -13,13 +13,19 @@ export default class Scoreboard implements CommonScoreboard {
   level: Level
   set: Set
   customSet?: string
+  bracketURL = ""
+  title = ""
 
   public static getExport(scoreboard: Scoreboard) {
+    console.log(scoreboard)
+
     return new ScoreboardExport(
       scoreboard.players,
       scoreboard.commentators,
       this.getLevelExport(scoreboard),
-      this.getSetExport(scoreboard)
+      this.getSetExport(scoreboard),
+      scoreboard.title,
+      scoreboard.bracketURL
     )
   }
 
@@ -28,6 +34,8 @@ export default class Scoreboard implements CommonScoreboard {
       scoreboard.level.bracket,
       scoreboard.level.round
     )
+
+    levelExport.custom = scoreboard.level.custom
 
     if (Level.shouldShowNumber(scoreboard.level)) {
       levelExport.number = scoreboard.level.number

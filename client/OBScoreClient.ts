@@ -111,6 +111,10 @@ export default class OBScoreClient {
     if (!level.bracket) {
       return "n/a"
     }
+
+    if (level.bracket.code === "custom") {
+      return level.custom
+    }
   
     if (!level.round) {
       return level.bracket.long

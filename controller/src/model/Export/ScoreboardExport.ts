@@ -14,7 +14,9 @@ export default class ScoreboardExport implements CommonScoreboard {
     players: Player[],
     commentators: Commentator[],
     level: LevelExport,
-    set: SetExport
+    set: SetExport,
+    public title: string,
+    public bracketURL: string
   ) {
     this.players = players
     this.commentators = commentators
