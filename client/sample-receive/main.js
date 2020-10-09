@@ -49,13 +49,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ...but we can also make our own format!
-    let newLevelText = ""
+    let newLevelText = "n/a"
 
-    if (data.level.bracket.code == "grandFinals") {
-      newLevelText = "Fin de partie"
-    } else {
-      newLevelText = data.level.bracket.long + " " + data.level.round.long // E.g. Losers Quarters
+    if (data.level.bracket) {
+      if (data.level.bracket.code == "grandFinals") {
+        newLevelText = "Fin de partie"
+      } else {
+        newLevelText = data.level.bracket.long + " " + data.level.round.long // E.g. Losers Quarters
+      }
     }
+
 
     updateElement(elements.level, newLevelText)
   })

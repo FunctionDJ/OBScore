@@ -1,8 +1,9 @@
-name: tagged-release
+name: automatic-release
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - "*"
 
 jobs:
   gh_tagged_release:
@@ -13,10 +14,10 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v2
 
-      - name: Use Node.js v12
+      - name: Use Node.js v12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 12.x
 
       - name: NPM Clean install all
         run: npm run ci-all
@@ -25,13 +26,12 @@ jobs:
         run: npm run build
 
       - name: Zip build files
-        run: zip -r OBScore-Release.zip ./build/
+        run: zip -r OBScore.zip ./build/
 
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: "latest"
-          prerelease: true 
-          files: ./OBScore-Release.zip
+          prerelease: false
+          files: ./OBScore.zip
           

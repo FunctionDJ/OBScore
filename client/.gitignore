@@ -2,3 +2,6 @@
 
 # parcel cache
 /.cache/
+
+# parcel dist files for development
+/dist/

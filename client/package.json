@@ -11,10 +11,14 @@
     "@types/socket.io": "^2.1.4",
     "@types/socket.io-client": "^1.4.32",
     "parcel-bundler": "^1.12.4",
-    "socket.io-client": "^2.3.0",
-    "typescript": "^3.8.3"
+    "socket.io-client": "^2.3.0"
   },
   "browserslist": [
     "last 5 Chrome versions"
-  ]
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "typescript": "^3.9.7"
+  }
 }

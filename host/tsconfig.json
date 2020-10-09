@@ -1,20 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "ES2015",
-    "resolveJsonModule": true,
-    "outDir": "dist",
-    "allowJs": false,
-    "removeComments": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": false,
-    "alwaysStrict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "module": "CommonJS",
+    "esModuleInterop": false,
+    "target": "ES6",
+    "noImplicitAny": false,
+    "moduleResolution": "Node",
+    "outDir": "dist"
   }
 }
