@@ -25,11 +25,13 @@ export default function SponsorTagInput({
         style={{flex: 0.3}}
         value={sponsor}
         onChange={changeSponsor}
+        placeholder="Sponsor"
       />
       <div className="border border-light"/>
       <FormControl
         value={tag}
         onChange={changeTag}
+        placeholder="Tag"
       />
     </InputGroup>
   )

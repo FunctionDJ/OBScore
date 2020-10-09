@@ -10,7 +10,7 @@ export default function Custom({
 }: {
   style: any, className?: string
 }) {
-  const state = useStore(Store)
+  const state: Scoreboard = useStore(Store)
 
   const changeCustom = ({target}) => {
     Store.set((state: Scoreboard) => {

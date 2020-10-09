@@ -11,7 +11,7 @@ function SideButton({
 }: {
   value: string
   active: boolean,
-  onClick: (Event) => void,
+  onClick: (Event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
   label: string,
   tooltip: string
 }) {

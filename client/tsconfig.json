@@ -9,6 +9,10 @@
     "noImplicitThis": false,
     "alwaysStrict": false,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
+  },
+  "exclude": [
+    "./dist"
+  ]
 }

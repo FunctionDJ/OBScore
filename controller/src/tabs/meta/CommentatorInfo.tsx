@@ -62,6 +62,7 @@ export default function CommentatorInfo({slot}: {slot: number}) {
           <FormControl
             value={commentator.twitter ?? ""}
             onChange={changeTwitter}
+            placeholder="Username"
           />
         </InputGroup>
         <InputGroup size="sm">
@@ -73,6 +74,7 @@ export default function CommentatorInfo({slot}: {slot: number}) {
           <FormControl
             value={commentator.twitch ?? ""}
             onChange={changeTwitch}
+            placeholder="Twitch handle"
           />
         </InputGroup>
       </div>
