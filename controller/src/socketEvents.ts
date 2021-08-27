@@ -14,7 +14,7 @@ export enum emittable {
   gibData = "gib data",
   logDefault = "log default",
   introduce = "introduce",
-  
+
   // Controller specific
   configChange = "config change",
   init = "init",

@@ -17,5 +17,8 @@
   "author": "waffeln",
   "license": "MIT",
   "bugs": "https://github.com/waffln/OBScore/issues",
-  "homepage": "https://github.com/waffln/OBScore"
+  "homepage": "https://github.com/waffln/OBScore",
+  "dependencies": {
+    "node-gyp": "^7.1.2"
+  }
 }

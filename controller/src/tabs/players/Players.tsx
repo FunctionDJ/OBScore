@@ -1,15 +1,15 @@
-import React, {Fragment} from "react"
-import {Row, Col} from "react-bootstrap"
-import PlayerInfo from "./PlayerInfo"
-import ResetButtons from "./resetbuttons/ResetButtons"
-import LevelComponent from "./level/Level"
+import React, { Fragment } from "react";
+import { Row, Col } from "react-bootstrap";
+import PlayerInfo from "./PlayerInfo";
+import ResetButtons from "./resetbuttons/ResetButtons";
+import LevelComponent from "./level/Level";
 
-import "./LevelSpacing.scss"
+import "./LevelSpacing.scss";
 
-export default function Players() {
+export default function Players (): JSX.Element {
   return (
     <Fragment>
-      <Row>
+      <Row className="mr-0">
         <Col>
           <PlayerInfo playerIndex={0}/>
         </Col>
@@ -21,11 +21,11 @@ export default function Players() {
         </Col>
         <div
           className="level-spacing"
-          style={{maxWidth: "none"}}
+          style={{ width: 250 }}
         >
           <LevelComponent/>
         </div>
       </Row>
     </Fragment>
-  )
+  );
 }

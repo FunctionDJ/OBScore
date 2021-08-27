@@ -1,12 +1,11 @@
-import React, { CSSProperties } from "react"
-import { ButtonGroup, Button, Tooltip, OverlayTrigger } from "react-bootstrap"
+import React, { CSSProperties } from "react";
+import { ButtonGroup, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
 
-import { useStore } from "laco-react"
-import Store from "../../store"
-import Scoreboard from "../../model/Scoreboard"
-import Side from "../../model/Side"
+import Scoreboard from "../../model/Scoreboard";
+import Side from "../../model/Side";
+import { useScoreboard } from "../../scoreboard-context";
 
-function SideButton({
+function SideButton ({
   value, active, onClick, label, tooltip
 }: {
   value: string
@@ -37,53 +36,53 @@ function SideButton({
         onFocus={
           // disable the annoying lingering focus visual behaviour
           ({ currentTarget }) => {
-            currentTarget.blur()
+            currentTarget.blur();
           }
         }
       >
         {label}
       </Button>
     </OverlayTrigger>
-  )
+  );
 }
 
-export default function SideComponent(
+export default function SideComponent (
   { playerIndex, style }:
   {playerIndex: number, style: CSSProperties}
-) {
-  const scoreboard: Scoreboard = useStore(Store)
-  const { players } = scoreboard
+): JSX.Element {
+  const [scoreboard, setScoreboard] = useScoreboard();
+  const { players } = scoreboard;
 
-  const { side } = players[playerIndex]
+  const { side } = players[playerIndex];
 
   const handleOnClick = ({ target }) => {
-    Store.set((state: Scoreboard) => {
-      const currentPlayer = state.players[playerIndex]
-      const newSide: Side = Side[target.value]
+    setScoreboard((state: Scoreboard) => {
+      const currentPlayer = state.players[playerIndex];
+      const newSide: Side = Side[target.value];
 
       // toggle functionality
       if (currentPlayer.side === newSide) {
-        currentPlayer.side = undefined
-        return state
+        currentPlayer.side = undefined;
+        return state;
       }
 
-      currentPlayer.side = newSide
+      currentPlayer.side = newSide;
 
       // automatic switching of the other side only applies to player[0] and [1] for now
       if (![0, 1].includes(playerIndex)) {
-        return state
+        return state;
       }
 
-      const otherPlayerIndex = playerIndex === 0 ? 1 : 0
-      const otherPlayer = state.players[otherPlayerIndex]
+      const otherPlayerIndex = playerIndex === 0 ? 1 : 0;
+      const otherPlayer = state.players[otherPlayerIndex];
 
       if (newSide === "winners") {
-        otherPlayer.side = Side.losers
+        otherPlayer.side = Side.losers;
       }
 
-      return state
-    })
-  }
+      return state;
+    });
+  };
 
   return (
     <ButtonGroup style={style}>
@@ -102,5 +101,5 @@ export default function SideComponent(
         tooltip="Losers Side"
       />
     </ButtonGroup>
-  )
+  );
 }

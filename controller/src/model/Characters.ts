@@ -3,4 +3,4 @@ enum Characters {
   "Luigi"
 }
 
-export default Characters
+export default Characters;

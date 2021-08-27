@@ -1,8 +1,8 @@
-import Player from "../Player"
-import Commentator from "../Commentator"
-import LevelExport from "./LevelExport"
-import CommonScoreboard from "../Common/CommonScoreboard"
-import SetExport from "./SetExport"
+import Player from "../Player";
+import Commentator from "../Commentator";
+import LevelExport from "./LevelExport";
+import CommonScoreboard from "../Common/CommonScoreboard";
+import SetExport from "./SetExport";
 
 export default class ScoreboardExport implements CommonScoreboard {
   players: Player[]
@@ -10,7 +10,7 @@ export default class ScoreboardExport implements CommonScoreboard {
   level: LevelExport
   set: SetExport
 
-  constructor(
+  constructor (
     players: Player[],
     commentators: Commentator[],
     level: LevelExport,
@@ -18,9 +18,9 @@ export default class ScoreboardExport implements CommonScoreboard {
     public title: string,
     public bracketURL: string
   ) {
-    this.players = players
-    this.commentators = commentators
-    this.level = level
-    this.set = set
+    this.players = players;
+    this.commentators = commentators;
+    this.level = level;
+    this.set = set;
   }
 }

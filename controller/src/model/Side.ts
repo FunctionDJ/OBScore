@@ -3,4 +3,4 @@ enum Side {
   losers = "losers"
 }
 
-export default Side
+export default Side;

@@ -1,29 +1,22 @@
 {
-  "name": "obscore-controller",
-  "version": "0.1.0",
-  "homepage": "./",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-brands-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/react-fontawesome": "^0.1.9",
-    "@types/bootstrap": "^4.3.2",
-    "@types/jquery": "^3.3.34",
-    "bootstrap": "^4.4.1",
-    "bootswatch": "^4.4.1",
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@types/bootstrap": "^5.0.9",
+    "@types/jquery": "^3.5.5",
+    "bootstrap": "^4.6.0",
+    "bootswatch": "^4.6.0",
+    "eslint-config-eslint": "^7.0.0",
+    "eslint-config-standard": "^16.0.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.5.0",
-    "laco": "^1.2.1",
-    "laco-react": "^1.1.0",
-    "node-sass": "^4.13.1",
-    "react": "^16.13.1",
-    "react-app-rewired": "^2.1.6",
-    "react-bootstrap": "^1.0.0",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
-    "socket.io-client": "^2.3.0",
-    "typescript": "^3.8.3"
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,9 +26,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -50,6 +40,9 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-root-import": "^6.5.0"
+    "babel-plugin-root-import": "^6.6.0",
+    "chokidar": "^3.5.2",
+    "sass": "^1.38.1",
+    "socket.io-client": "^4.1.3"
   }
 }

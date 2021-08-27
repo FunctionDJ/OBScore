@@ -6,4 +6,4 @@ enum BorderRadius {
   none = "no-borders"
 }
 
-export default BorderRadius
+export default BorderRadius;

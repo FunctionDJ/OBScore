@@ -1,7 +1,4 @@
 .level-spacing {
   display: flex;
-
-  > *:not(:first-child) {
-    margin-left: 1rem;
-  }
+  justify-content: space-between;
 }

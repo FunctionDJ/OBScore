@@ -1,5 +1,6 @@
-import io from "socket.io"
+import { Server } from "socket.io"
 import chalk from "chalk"
+import { createServer } from "http"
 
 let config = {}
 
@@ -16,7 +17,14 @@ import { changeConfig, socketLogDefault, clientError, gibData, updateFiles } fro
 import * as emittable from "./events/emittable"
 import * as receivable from "./events/receivable"
 
-const ioSocket = io(3001)
+const httpServer = createServer()
+const ioSocket = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "PUT", "POST", "DELETE", "PATCH"]
+  }
+})
+httpServer.listen(3001)
 
 let controllerId: string = null
 

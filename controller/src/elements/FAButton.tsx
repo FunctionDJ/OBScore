@@ -1,61 +1,60 @@
-import React from "react"
+import React, { FC } from "react";
 
-import {Button, ButtonProps} from "react-bootstrap"
+import { Button, ButtonProps } from "react-bootstrap";
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import * as fa from "@fortawesome/free-solid-svg-icons"
+import * as fa from "@fortawesome/free-solid-svg-icons";
 
-interface FAButtonProps extends ButtonProps {
+interface Props extends ButtonProps {
   children: [
     fa.IconDefinition,
-    any?,
+    unknown?,
     fa.IconDefinition?
   ],
   className?: string,
-  onClick?: any,
-  onMouseDown?: any,
+  onClick?: () => void,
+  onMouseDown?: () => void,
   center?: boolean,
   style?: React.CSSProperties
 }
 
-export default function FAButton(props: FAButtonProps) {
-  const buttonProps = {...props}
-  delete buttonProps.children
-  delete buttonProps.center
+const FAButton: FC<Props> = ({ children, center: centerProp, ...buttonProps }) => {
+  const center = centerProp || (!!children[2]);
 
-  const center = props.center || (!!props.children[2])
+  const hasCenterChild = !!children[1];
 
-  const hasCenterChild = !!props.children[1]
-
-  let rightSide = <div></div>
+  let rightSide = <div></div>;
 
   if (center) {
-    if (props.children[2]) {
+    if (children[2]) {
       rightSide = <FontAwesomeIcon
-        icon={props.children[2]}
-        style={hasCenterChild ? {marginLeft: "0.5rem"} : {}}
-      />
+        icon={children[2]}
+        style={hasCenterChild ? { marginLeft: "0.5rem" } : {}}
+      />;
     } else {
       rightSide = <div style={{
         display: "inline-block",
-        width: "1em", height: "1em",
+        width: "1em",
+        height: "1em",
         marginLeft: "0.5rem"
       }}>
-      </div>
+      </div>;
     }
   }
 
   return (
     <Button {...buttonProps}>
       <FontAwesomeIcon
-        icon={props.children[0]}
-        style={hasCenterChild ? {marginRight: "0.5rem"} : {}}
+        icon={children[0]}
+        style={hasCenterChild ? { marginRight: "0.5rem" } : {}}
       />
 
-      {props.children[1] || ""}
+      {children[1] || ""}
 
       {rightSide}
     </Button>
-  )
-}
+  );
+};
+
+export default FAButton;
