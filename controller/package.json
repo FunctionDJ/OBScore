@@ -1,4 +1,5 @@
 {
+  "homepage": "./",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -20,9 +21,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "rm -rf ../build/controller/",
+    "prebuild": "rimraf ../build/controller/",
     "build": "react-scripts build",
-    "postbuild": "mv build ../build/controller/",
+    "postbuild": "move-cli build ../build/controller/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
@@ -42,6 +43,8 @@
   "devDependencies": {
     "babel-plugin-root-import": "^6.6.0",
     "chokidar": "^3.5.2",
+    "move-cli": "^1.2.1",
+    "rimraf": "^3.0.2",
     "sass": "^1.38.1",
     "socket.io-client": "^4.1.3"
   }

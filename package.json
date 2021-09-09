@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "description": "A platform fighter scoreboard controller",
   "scripts": {
-    "client": "cd client && npm start",
-    "controller": "cd controller && npm start",
-    "host": "cd host && npm start",
-    "install": "cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
-    "ci-all": "cd client && npm ci && cd ../controller && npm ci && cd ../host && npm ci",
-    "build": "cd client && npm run build && cd ../controller && npm run build && cd ../host && npm run build"
+    "start:host": "ts-node src/host/main",
+    "prebuild:host": "parcel build src/host/main.ts --target node",
+    "build:host": "npm run prebuild:host && nexe dist/main.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +17,10 @@
   "homepage": "https://github.com/waffln/OBScore",
   "dependencies": {
     "node-gyp": "^7.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.13",
+    "chalk": "^4.1.2",
+    "socket.io": "^4.2.0"
   }
 }

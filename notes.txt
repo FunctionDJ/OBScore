@@ -1,0 +1,1 @@
+- wenn man den controller baut, hat die resultierende HTML absolute pfade mit `/static`, was bei file:/// den shit kaputt macht. muss relativ sein.
