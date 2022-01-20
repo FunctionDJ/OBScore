@@ -20,9 +20,11 @@ import * as receivable from "./events/receivable"
 const httpServer = createServer()
 const ioSocket = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: ["http://localhost:3000", "null", null],
+    credentials: true,
     methods: ["GET", "PUT", "POST", "DELETE", "PATCH"]
-  }
+  },
+  allowEIO3: true // can probably be fixed by updating all socket io things?
 })
 httpServer.listen(3001)
 

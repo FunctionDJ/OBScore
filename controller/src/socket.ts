@@ -1,5 +1,5 @@
-import { io } from "socket.io-client";
 import { receivable } from "./socketEvents";
+import io from "socket.io-client";
 
 const socket = io("http://localhost:3001");
 

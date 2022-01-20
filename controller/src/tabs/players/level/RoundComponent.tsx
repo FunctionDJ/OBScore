@@ -22,7 +22,9 @@ const RoundToggleButton = ({ round, className, onChange, currentRound }: RoundTo
         size="sm"
         value={round.code}
         checked={currentRound === round}
-        onChange={onChange}
+        onChange={(event) => {
+          onChange(event)
+        }}
         name="round"
         className={className}
         type="radio" // important
