@@ -34,21 +34,21 @@ export default function SetComponent (): ReactElement {
         <ToggleButton
           size="sm"
           checked={scoreboard.set === SetTypes.bo3}
-          value={SetTypes.bo3.code}
+          value={SetTypes.bo3}
         >
           BO3
         </ToggleButton>
         <ToggleButton
           size="sm"
           checked={scoreboard.set === SetTypes.bo5}
-          value={SetTypes.bo5.code}
+          value={SetTypes.bo5}
         >
           BO5
         </ToggleButton>
         <ToggleButton
           size="sm"
           checked={scoreboard.set === SetTypes.custom}
-          value={SetTypes.custom.code}
+          value={SetTypes.custom}
         >
           Custom
         </ToggleButton>
