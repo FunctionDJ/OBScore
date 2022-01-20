@@ -6,9 +6,6 @@ import "../../../elements/BorderRadius.scss";
 import "./ResetButtons.scss";
 
 import Player from "../../../model/Player";
-import Level from "../../../model/Level";
-import Brackets from "../../../model/Bracket";
-import Rounds from "../../../model/Round";
 import { useScoreboard } from "../../../scoreboard-context";
 
 type QuadButtonProps = {
@@ -94,11 +91,6 @@ export default function ResetButtons (): JSX.Element {
         new Player(""),
         new Player("")
       ];
-
-      state.level = new Level(
-        Brackets.pools,
-        Rounds.midRound
-      );
 
       return { ...state };
     });
