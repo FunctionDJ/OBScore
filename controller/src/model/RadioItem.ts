@@ -1,5 +1,5 @@
 export default abstract class RadioItem<T> {
-  constructor(
+  constructor (
     readonly code: string,
     readonly short: string,
     readonly long: string,

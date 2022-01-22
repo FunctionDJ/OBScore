@@ -1,32 +1,30 @@
-import React, {Fragment} from "react"
+import React, { ReactElement } from "react";
 
-import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
-import "../../../elements/BorderRadius.scss"
+import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+import "../../../elements/BorderRadius.scss";
 
-import {useStore} from "laco-react"
-import Store from "../../../store"
+import BorderRadius from "../../../elements/BorderRadius";
+import Brackets, { class as Bracket } from "../../../model/Bracket";
+import { useScoreboard } from "../../../scoreboard-context";
 
-import BorderRadius from "../../../elements/BorderRadius"
-import Scoreboard from "../../../model/Scoreboard"
+export default function BracketComponent (): ReactElement {
+  const [scoreboard, setScoreboard] = useScoreboard();
 
-import Brackets, {class as Bracket} from "../../../model/Bracket"
+  const changeBracket = ({ target }) => {
+    const input = target.querySelector("input");
 
-export default function BracketComponent() {
-  const scoreboard: Scoreboard = useStore(Store)
-
-  const changeBracket = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.level.bracket = Brackets[target.value]
-      return state
-    })
-  }
+    setScoreboard(state => {
+      state.level.bracket = Brackets[input.value];
+      return { ...state };
+    });
+  };
 
   type BracketToggleButtonProps = {
     bracket: Bracket
     className: string
   }
 
-  const BracketToggleButton = ({bracket, className}: BracketToggleButtonProps) => (
+  const BracketToggleButton = ({ bracket, className }: BracketToggleButtonProps) => (
     <td>
       <ToggleButton
         size="sm"
@@ -34,7 +32,7 @@ export default function BracketComponent() {
         checked={
           scoreboard.level.bracket ? scoreboard.level.bracket === bracket : false
         }
-        onChange={changeBracket}
+        onMouseDown={changeBracket}
         name="bracket"
         className={className}
         type="radio" // important
@@ -42,48 +40,47 @@ export default function BracketComponent() {
         {bracket.short}
       </ToggleButton>
     </td>
-  )
+  );
 
   return (
-    <Fragment>
-      <ToggleButtonGroup
-        defaultValue={Brackets.pools.code}
-        name="bracket"
-        type="radio"
-      >
-        <table cellPadding={0}>
-          <tbody>
-            <tr>
-              <BracketToggleButton
-                bracket={Brackets.pools}
-                className={BorderRadius.topLeft}
-              />
-              <BracketToggleButton
-                bracket={Brackets.winners}
-                className={BorderRadius.none}
-              />
-              <BracketToggleButton
-                bracket={Brackets.grandFinals}
-                className={BorderRadius.topRight}
-              />
-            </tr>
-            <tr>
-              <BracketToggleButton
-                bracket={Brackets.roundRobin}
-                className={BorderRadius.bottomLeft}
-              />
-              <BracketToggleButton
-                bracket={Brackets.losers}
-                className={BorderRadius.none}
-              />
-              <BracketToggleButton
-                bracket={Brackets.custom}
-                className={BorderRadius.bottomRight}
-              />
-            </tr>
-          </tbody>
-        </table>
-      </ToggleButtonGroup>
-    </Fragment>
-  )
+    <ToggleButtonGroup
+      defaultValue={Brackets.pools.code}
+      name="bracket"
+      type="radio"
+      style={{ marginRight: 15 }}
+    >
+      <table cellPadding={0}>
+        <tbody>
+          <tr>
+            <BracketToggleButton
+              bracket={Brackets.pools}
+              className={BorderRadius.topLeft}
+            />
+            <BracketToggleButton
+              bracket={Brackets.winners}
+              className={BorderRadius.none}
+            />
+            <BracketToggleButton
+              bracket={Brackets.grandFinals}
+              className={BorderRadius.topRight}
+            />
+          </tr>
+          <tr>
+            <BracketToggleButton
+              bracket={Brackets.roundRobin}
+              className={BorderRadius.bottomLeft}
+            />
+            <BracketToggleButton
+              bracket={Brackets.losers}
+              className={BorderRadius.none}
+            />
+            <BracketToggleButton
+              bracket={Brackets.custom}
+              className={BorderRadius.bottomRight}
+            />
+          </tr>
+        </tbody>
+      </table>
+    </ToggleButtonGroup>
+  );
 }

@@ -1,11 +1,11 @@
-import io from "socket.io-client"
-import {receivable} from "./socketEvents"
+import { receivable } from "./socketEvents";
+import io from "socket.io-client";
 
-const socket = io("http://localhost:3001")
+const socket = io("http://localhost:3001");
 
 // socket.close()
 
-export default socket
+export default socket;
 
-socket.on(receivable.connect, () => console.log("Connected"))
-socket.on(receivable.disconnect, () => console.log("Disconnected"))
+socket.on(receivable.connect as string, () => console.log("Connected"));
+socket.on(receivable.disconnect as string, () => console.log("Disconnected"));

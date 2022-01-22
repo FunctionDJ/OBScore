@@ -1,16 +1,15 @@
-import React from "react"
-import {FormControl} from "react-bootstrap"
+import React, { FC } from "react";
+import { FormControl } from "react-bootstrap";
 
-import FAButton from "./FAButton"
+import FAButton from "./FAButton";
 
-import {faArrowUp, faArrowDown, faUndo} from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faArrowDown, faUndo } from "@fortawesome/free-solid-svg-icons";
 
-import "./NumberController.scss"
+import "./NumberController.scss";
 
-import BorderRadius from "./BorderRadius"
-import "./BorderRadius"
+import BorderRadius from "./BorderRadius";
 
-type NumberControllerProps = {
+type Props = {
   value: number
   defaultValue: number
   onChange: (number: number) => void
@@ -19,44 +18,44 @@ type NumberControllerProps = {
   reverse?: boolean
 }
 
-const FAButtonSharedClasses = "py-0 px-1 slim-button "
+const FAButtonSharedClasses = "py-0 px-1 slim-button ";
 
-export default function NumberController(props: NumberControllerProps) {
-  const {value, defaultValue, onChange, min, max} = props
-  const reverse = props.reverse || false
+const NumberController: FC<Props> = (props) => {
+  const { value, defaultValue, onChange, min, max } = props;
+  const reverse = props.reverse || false;
 
-  const handleChange = ({target}) => {
-    const number = parseInt(target.value, 10)
-    onChange(number)
-  }
+  const handleChange = ({ target }) => {
+    const number = parseInt(target.value, 10);
+    onChange(number);
+  };
 
   const increment = () => {
-    onChange(Math.min(value + 1, max))
-  }
+    onChange(Math.min(value + 1, max));
+  };
 
   const decrement = () => {
-    onChange(Math.max(value - 1, min))
-  }
+    onChange(Math.max(value - 1, min));
+  };
 
   const reset = () => {
-    onChange(defaultValue)
-  }
+    onChange(defaultValue);
+  };
 
-  const handleWheel = ({deltaY}) => {
-    deltaY < 0 ? increment() : decrement()
-  }
+  const handleWheel = ({ deltaY }) => {
+    deltaY < 0 ? increment() : decrement();
+  };
 
   return (
     <div
       className="d-flex"
       onWheel={handleWheel}
-      style={{flexDirection: reverse ? "row-reverse" : "row"}}
+      style={{ flexDirection: reverse ? "row-reverse" : "row" }}
     >
       <FormControl
         className={
-          reverse ?
-            `${BorderRadius.topRight} ${BorderRadius.bottomRight}` :
-            `${BorderRadius.topLeft} ${BorderRadius.bottomLeft}`
+          reverse
+            ? `${BorderRadius.topRight} ${BorderRadius.bottomRight}`
+            : `${BorderRadius.topLeft} ${BorderRadius.bottomLeft}`
         }
         type="number"
         value={
@@ -81,9 +80,9 @@ export default function NumberController(props: NumberControllerProps) {
           size="sm"
           className={
             FAButtonSharedClasses + (
-              reverse ?
-                BorderRadius.topLeft :
-                BorderRadius.topRight
+              reverse
+                ? BorderRadius.topLeft
+                : BorderRadius.topRight
             )
           }
         >
@@ -103,9 +102,9 @@ export default function NumberController(props: NumberControllerProps) {
           size="sm"
           className={
             FAButtonSharedClasses + (
-              reverse ?
-                BorderRadius.bottomLeft :
-                BorderRadius.bottomRight
+              reverse
+                ? BorderRadius.bottomLeft
+                : BorderRadius.bottomRight
             )
           }
         >
@@ -113,5 +112,7 @@ export default function NumberController(props: NumberControllerProps) {
         </FAButton>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default NumberController;

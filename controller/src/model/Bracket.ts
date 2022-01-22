@@ -1,4 +1,4 @@
-import RadioItem from "./RadioItem"
+import RadioItem from "./RadioItem";
 
 enum BracketType {
   pools,
@@ -18,11 +18,11 @@ const Brackets = {
   grandFinals: new Bracket("grandFinals", "GF", "Grand-Finals", BracketType.grandFinals),
   roundRobin: new Bracket("roundRobin", "RR", "Round Robin", BracketType.roundRobin),
   custom: new Bracket("custom", "C", "Custom", BracketType.custom)
-} as const
+} as const;
 
-export default Brackets
+export default Brackets;
 
 export {
   BracketType as type,
   Bracket as class
-}
+};

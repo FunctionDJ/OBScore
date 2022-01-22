@@ -1,71 +1,67 @@
-import React from "react"
-
-import {useStore} from "laco-react"
-
-import PlayerStore from "../../store"
+import React, { ReactElement } from "react";
 
 import {
   Form,
   InputGroup,
   FormControl as Control
-} from "react-bootstrap"
+} from "react-bootstrap";
 
-import {FontAwesomeIcon as FAIcon} from "@fortawesome/react-fontawesome"
-import * as fa from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon as FAIcon } from "@fortawesome/react-fontawesome";
+import * as fa from "@fortawesome/free-solid-svg-icons";
 
-import characters from "../Characters.json"
-import NumberController from "../../elements/NumberController"
-import SideComponent from "./SideComponent"
+import characters from "../Characters.json";
+import NumberController from "../../elements/NumberController";
+import SideComponent from "./SideComponent";
 
-import {CSSTransition} from "react-transition-group"
-import "./SideAnimation.scss"
-import Scoreboard from "../../model/Scoreboard"
-import SponsorTagInput from "../../elements/SponsorTagInput"
+import { CSSTransition } from "react-transition-group";
+// import "./SideAnimation.scss";
+import SponsorTagInput from "../../elements/SponsorTagInput";
+import { useScoreboard } from "../../scoreboard-context";
 
-const chars = ["No Character", ...characters.sort()]
+const chars = ["No Character", ...characters.sort()];
 
-const {Prepend, Text: IGText} = InputGroup
+const { Prepend, Text: IGText } = InputGroup;
 
 type PlayerInfoProps = {
   playerIndex: number
   reverse?: boolean
 }
 
-export default function PlayerInfo(props: PlayerInfoProps) {
-  const {playerIndex} = props
-  const reverse = props.reverse || false
+export default function PlayerInfo (props: PlayerInfoProps): ReactElement {
+  const { playerIndex } = props;
+  const reverse = props.reverse || false;
 
-  const scoreboard: Scoreboard = useStore(PlayerStore)
+  const [scoreboard, setScoreboard] = useScoreboard();
 
-  const playerState = scoreboard.players[playerIndex]
+  const playerState = scoreboard.players[playerIndex];
 
-  const changeSponsor = ({target}) => {
-    PlayerStore.set((state: Scoreboard) => {
-      state.players[playerIndex].sponsor = target.value
-      return state
-    })
-  }
+  const changeSponsor = ({ target }) => {
+    setScoreboard(scoreboard => {
+      scoreboard.players[playerIndex].sponsor = target.value;
+      return { ...scoreboard };
+    });
+  };
 
-  const changeTag = ({target}) => {
-    PlayerStore.set((state: Scoreboard) => {
-      state.players[playerIndex].tag = target.value
-      return state
-    })
-  }
+  const changeTag = ({ target }) => {
+    setScoreboard(scoreboard => {
+      scoreboard.players[playerIndex].tag = target.value;
+      return { ...scoreboard };
+    });
+  };
 
-  const changeCharacter = ({target}) => {
-    PlayerStore.set((state: Scoreboard) => {
-      state.players[playerIndex].character = target.value
-      return state
-    })
-  }
+  const changeCharacter = ({ target }) => {
+    setScoreboard(scoreboard => {
+      scoreboard.players[playerIndex].character = target.value;
+      return { ...scoreboard };
+    });
+  };
 
   const changeScore = (newScore: number) => {
-    PlayerStore.set((state: Scoreboard) => {
-      state.players[playerIndex].score = newScore
-      return state
-    })
-  }
+    setScoreboard(scoreboard => {
+      scoreboard.players[playerIndex].score = newScore;
+      return { ...scoreboard };
+    });
+  };
 
   // const showSide = scoreboard.level.bracket === Bracket.grandFinals
 
@@ -74,7 +70,7 @@ export default function PlayerInfo(props: PlayerInfoProps) {
       display: "flex",
       flexDirection: reverse ? "row-reverse" : "row"
     }}>
-      <div style={{flex: 1}}>
+      <div style={{ flex: 1 }}>
         <SponsorTagInput
           sponsor={playerState.sponsor}
           changeSponsor={changeSponsor}
@@ -98,8 +94,8 @@ export default function PlayerInfo(props: PlayerInfoProps) {
           </InputGroup>
           <CSSTransition in={false} timeout={200} classNames="round-animation">
             <div className="d-flex">
-              <div style={{width: 6}}/>
-              <SideComponent style={{flex: 1}} playerIndex={playerIndex}/>
+              <div style={{ width: 6 }}/>
+              <SideComponent style={{ flex: 1 }} playerIndex={playerIndex}/>
             </div>
           </CSSTransition>
         </div>
@@ -118,5 +114,5 @@ export default function PlayerInfo(props: PlayerInfoProps) {
         reverse={reverse}
       />
     </Form>
-  )
+  );
 }

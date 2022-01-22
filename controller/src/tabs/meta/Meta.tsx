@@ -1,63 +1,60 @@
-import React, {Fragment} from "react"
-import CommentatorInfo from "./CommentatorInfo"
-import FAButton from "../../elements/FAButton"
+import React, { Fragment, ReactElement } from "react";
+import CommentatorInfo from "./CommentatorInfo";
+import FAButton from "../../elements/FAButton";
 
-import Store from "../../store"
-import Scoreboard from "../../model/Scoreboard"
+import Scoreboard from "../../model/Scoreboard";
 
-import * as fa from "@fortawesome/free-solid-svg-icons"
-import { Row, Col, Form} from "react-bootstrap"
-import Commentator from "../../model/Commentator"
-import SetComponent from "./SetComponent"
+import * as fa from "@fortawesome/free-solid-svg-icons";
+import { Row, Col, Form } from "react-bootstrap";
+import Commentator from "../../model/Commentator";
+import SetComponent from "./SetComponent";
+import { useScoreboard } from "../../scoreboard-context";
 
-import {useStore} from "laco-react"
-
-export default function Meta() {
-  const scoreboard: Scoreboard = useStore(Store)
+export default function Meta (): ReactElement {
+  const [scoreboard, setScoreboard] = useScoreboard();
 
   const switchAll = () => {
-    Store.set((state: Scoreboard) => {
+    setScoreboard((state: Scoreboard) => {
       for (const key in state.commentators) {
-        const index = parseInt(key)
+        const index = parseInt(key);
 
-        if (index % 2 === 0)
-          continue
+        if (index % 2 === 0) { continue; }
 
-        const currentCommentator = state.commentators[key]
-        const otherCommentator = state.commentators[index - 1]
+        const currentCommentator = state.commentators[key];
+        const otherCommentator = state.commentators[index - 1];
 
-        state.commentators[index - 1] = currentCommentator
-        state.commentators[key] = otherCommentator
+        state.commentators[index - 1] = currentCommentator;
+        state.commentators[key] = otherCommentator;
       }
 
-      return state
-    })
-  }
+      return { ...state };
+    });
+  };
 
   const resetCommentators = () => {
-    Store.set((scoreboard: Scoreboard) => {
+    setScoreboard((scoreboard: Scoreboard) => {
       scoreboard.commentators = [
         new Commentator(""),
         new Commentator("")
-      ]
+      ];
 
-      return scoreboard
-    })
-  }
+      return { ...scoreboard };
+    });
+  };
 
-  const changeTitle = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.title = target.value
-      return state
-    })
-  }
+  const changeTitle = ({ target }) => {
+    setScoreboard((state: Scoreboard) => {
+      state.title = target.value;
+      return { ...state };
+    });
+  };
 
-  const changeBracketURL = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.bracketURL = target.value
-      return state
-    })
-  }
+  const changeBracketURL = ({ target }) => {
+    setScoreboard((state: Scoreboard) => {
+      state.bracketURL = target.value;
+      return { ...state };
+    });
+  };
 
   return (
     <Fragment>
@@ -104,5 +101,5 @@ export default function Meta() {
         </Col>
       </Row>
     </Fragment>
-  )
+  );
 }

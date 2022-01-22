@@ -1,4 +1,4 @@
-import RadioItem from "./RadioItem"
+import RadioItem from "./RadioItem";
 
 enum RoundType {
   midRound = "Round",
@@ -14,11 +14,11 @@ const Rounds = {
   quarters: new Round("quarters", "Q", "Quarters", RoundType.quarters),
   semis: new Round("semis", "S", "Semis", RoundType.semis),
   finals: new Round("finals", "F", "Finals", RoundType.finals)
-} as const
+} as const;
 
-export default Rounds
+export default Rounds;
 
 export {
   RoundType as type,
   Round as class
-}
+};

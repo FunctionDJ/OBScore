@@ -1,45 +1,44 @@
-import React from "react"
+import React, { FC } from "react";
 
-import {useStore} from "laco-react"
-import Store from "../../store"
-import Scoreboard from "../../model/Scoreboard"
-import SponsorTagInput from "../../elements/SponsorTagInput"
-import { Form, InputGroup, FormControl } from "react-bootstrap"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {faTwitter, faTwitch} from "@fortawesome/free-brands-svg-icons"
+import Scoreboard from "../../model/Scoreboard";
+import SponsorTagInput from "../../elements/SponsorTagInput";
+import { Form, InputGroup, FormControl } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter, faTwitch } from "@fortawesome/free-brands-svg-icons";
+import { useScoreboard } from "../../scoreboard-context";
 
-export default function CommentatorInfo({slot}: {slot: number}) {
-  const scoreboard: Scoreboard = useStore(Store)
+const CommentatorInfo: FC<{ slot: number }> = ({ slot }) => {
+  const [scoreboard, setScoreboard] = useScoreboard();
 
-  const commentator = scoreboard.commentators[slot]
+  const commentator = scoreboard.commentators[slot];
 
-  const changeSponsor = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.commentators[slot].sponsor = target.value
-      return state
-    })
-  }
+  const changeSponsor = ({ target }) => {
+    setScoreboard((state: Scoreboard) => {
+      state.commentators[slot].sponsor = target.value;
+      return { ...state };
+    });
+  };
 
-  const changeTag = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.commentators[slot].tag = target.value
-      return state
-    })
-  }
+  const changeTag = ({ target }) => {
+    setScoreboard(state => {
+      state.commentators[slot].tag = target.value;
+      return { ...state };
+    });
+  };
 
-  const changeTwitter = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.commentators[slot].twitter = target.value
-      return state
-    })
-  }
+  const changeTwitter = ({ target }) => {
+    setScoreboard(state => {
+      state.commentators[slot].twitter = target.value;
+      return { ...state };
+    });
+  };
 
-  const changeTwitch = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.commentators[slot].twitch = target.value
-      return state
-    })
-  }
+  const changeTwitch = ({ target }) => {
+    setScoreboard((state: Scoreboard) => {
+      state.commentators[slot].twitch = target.value;
+      return { ...state };
+    });
+  };
 
   return (
     <Form>
@@ -49,7 +48,7 @@ export default function CommentatorInfo({slot}: {slot: number}) {
         tag={commentator.tag}
         changeTag={changeTag}
       />
-      <div style={{display: "flex"}}>
+      <div style={{ display: "flex" }}>
         <InputGroup size="sm">
           <InputGroup.Prepend>
             <InputGroup.Text>
@@ -79,5 +78,7 @@ export default function CommentatorInfo({slot}: {slot: number}) {
         </InputGroup>
       </div>
     </Form>
-  )
-}
+  );
+};
+
+export default CommentatorInfo;

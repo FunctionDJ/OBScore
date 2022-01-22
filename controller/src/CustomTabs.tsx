@@ -1,62 +1,58 @@
-import React from "react"
+import React, { Dispatch, ReactElement, ReactNode, SetStateAction } from "react";
 
-import FAButton from "./elements/FAButton"
-import * as fa from "@fortawesome/free-solid-svg-icons"
+import FAButton from "./elements/FAButton";
+import { faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 
-import "bootstrap"
-import "jquery"
-
-import socket from "./socket"
-import {emittable} from "./socketEvents"
-
-import {useStore} from "laco-react"
-import PlayerStore from "./store"
-import Scoreboard from "./model/Scoreboard"
+import socket from "./socket";
+import { emittable } from "./socketEvents";
+import { useScoreboard } from "./scoreboard-context";
+import { getSBExport } from "./model/Scoreboard";
 
 type LinkProps = {
   id: string,
-  active?: boolean,
-  children: any
+  children: ReactNode
+  tab: string
+  setTab: Dispatch<SetStateAction<string>>
 }
 
-const Link = ({id, active = false, children}: LinkProps) => (
-  <a
-    className={`nav-item nav-link ${active ? "active" : ""}`}
-    id={`nav-${id}-tab`}
-    data-toggle="tab"
-    href={`#nav-${id}`}
-    role="tab"
-    aria-controls={`nav-${id}`}
-    style={{
-      padding: "2px 5px"
-    }}
-  >
-    {children}
-  </a>
-)
+function Link ({ id, children, tab, setTab }: LinkProps) {
+  return (
+    <button
+      className={`nav-item nav-link ${tab === id ? "active" : ""}`}
+      onMouseDown={() => setTab(id)}
+    >
+      {children}
+    </button>
+  );
+}
 
-export default function CustomTabs() {
-  const state: Scoreboard = useStore(PlayerStore)
+interface Props {
+  tab: string
+  setTab: Dispatch<SetStateAction<string>>
+}
+
+export function CustomTabs ({ tab, setTab }: Props): ReactElement {
+  const [scoreboard] = useScoreboard();
 
   const update = () => {
-    socket.emit(emittable.updateWebSocket, Scoreboard.getExport(state))
-  }
+    socket.emit(emittable.updateWebSocket, getSBExport(scoreboard));
+  };
 
   return (
     <nav>
       <div className="nav nav-tabs">
-        <Link id="players" active={true}>Players</Link>
-        <Link id="meta">Meta</Link>
+        <Link tab={tab} setTab={setTab} id="players">Players</Link>
+        <Link tab={tab} setTab={setTab} id="meta">Meta</Link>
         <FAButton
           variant="success"
           className="ml-auto mr-2 align-self-center px-3 py-0"
           size="sm"
           onClick={update}
         >
-          {fa.faSyncAlt}
+          {faSyncAlt}
           Update
         </FAButton>
       </div>
     </nav>
-  )
+  );
 }

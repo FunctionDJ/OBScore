@@ -1,63 +1,15 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
-  },
   "extends": [
-    "eslint:recommended",
+    "standard",
+    "react-app",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
-  ],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-        "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "arrow-parens": "off",
-    "linebreak-style": "off",
-    "comma-dangle": "off",
-    "indent": [
-      "error",
-      2
-    ],
-    "quotes": [
-      "error",
-      "double"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars":  ["error", {
-      "args": "all"
-    }],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".jsx",
-          ".tsx"
-        ]
-      }
-    ],
-    "import/no-unresolved": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
+    "indent": [ "error", 2, { "SwitchCase": 1 } ],
+    "quotes": [ "error", "double" ],
+    "semi": [ "error", "always" ],
+    "eol-last": ["error", "never"],
+    "react/prop-types": "off"
   }
 }

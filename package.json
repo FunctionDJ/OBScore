@@ -3,19 +3,30 @@
   "version": "0.1.0",
   "description": "A platform fighter scoreboard controller",
   "scripts": {
-    "client": "cd client && npm start",
-    "controller": "cd controller && npm start",
-    "host": "cd host && npm start",
-    "install": "cd client && npm install --no-optional && cd ../controller && npm install --no-optional && cd ../host && npm install --no-optional",
-    "ci-all": "cd client && npm ci && cd ../controller && npm ci && cd ../host && npm ci",
-    "build": "cd client && npm run build && cd ../controller && npm run build && cd ../host && npm run build"
+    "start:host": "ts-node src/host/main",
+    "prebuild:host": "parcel build src/host/main.ts",
+    "build:host": "npm run prebuild:host && npm run nexe",
+    "nexe": "nexe dist/main.js",
+    "pkg": "pkg dist/main.js --targets node16-win-x64 --compress GZip"
   },
   "repository": {
     "type": "git",
     "url": "github:waffln/OBScore"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "author": "waffeln",
   "license": "MIT",
   "bugs": "https://github.com/waffln/OBScore/issues",
-  "homepage": "https://github.com/waffln/OBScore"
+  "homepage": "https://github.com/waffln/OBScore",
+  "devDependencies": {
+    "@types/node": "^16.7.13",
+    "chalk": "^4.1.2",
+    "nexe": "^4.0.0-beta.19",
+    "parcel": "^2.2.1",
+    "pkg": "^5.5.2",
+    "socket.io": "^4.2.0",
+    "ts-node": "^10.4.0"
+  }
 }

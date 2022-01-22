@@ -1,32 +1,30 @@
-import React from "react"
-import { FormControl } from "react-bootstrap"
+import React, { ReactElement } from "react";
+import { FormControl } from "react-bootstrap";
 
-import {useStore} from "laco-react"
-import Store from "../../../store"
-import Scoreboard from "../../../model/Scoreboard"
+import { useScoreboard } from "../../../scoreboard-context";
 
-export default function Custom({
+export default function Custom ({
   style, className
 }: {
-  style: any, className?: string
-}) {
-  const state: Scoreboard = useStore(Store)
+  style: React.CSSProperties, className?: string
+}): ReactElement {
+  const [scoreboard, setScoreboard] = useScoreboard();
 
-  const changeCustom = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.level.custom = target.value
-      return state
-    })
-  }
+  const changeCustom = ({ target }) => {
+    setScoreboard(state => {
+      state.level.custom = target.value;
+      return { ...state };
+    });
+  };
 
   return (
     <FormControl
       className={className ?? ""}
-      value={state.level.custom}
+      value={scoreboard.level.custom}
       onChange={changeCustom}
-      //size="sm"
+      // size="sm"
       style={style}
       as="textarea"
     />
-  )
+  );
 }

@@ -1,24 +1,20 @@
-import React, {Fragment} from "react"
-import {Row, Col} from "react-bootstrap"
-import FAButton from "../../../elements/FAButton"
-import * as fa from "@fortawesome/free-solid-svg-icons"
-import "../../../elements/BorderRadius.scss"
-import "./ResetButtons.scss"
+import React, { Fragment, ReactNode } from "react";
+import { Row, Col } from "react-bootstrap";
+import FAButton from "../../../elements/FAButton";
+import * as fa from "@fortawesome/free-solid-svg-icons";
+import "../../../elements/BorderRadius.scss";
+import "./ResetButtons.scss";
 
-import Store from "../../../store"
-import Scoreboard from "../../../model/Scoreboard"
-import Player from "../../../model/Player"
-import Level from "../../../model/Level"
-import Brackets from "../../../model/Bracket"
-import Rounds from "../../../model/Round"
+import Player from "../../../model/Player";
+import { useScoreboard } from "../../../scoreboard-context";
 
 type QuadButtonProps = {
   className: string,
-  children: any,
-  callback: Function
+  children: ReactNode,
+  callback: () => void
 }
 
-const QuadButton = ({className, children, callback}: QuadButtonProps) => (
+const QuadButton = ({ className, children, callback }: QuadButtonProps) => (
   <FAButton
     variant="dark"
     size="sm"
@@ -30,81 +26,75 @@ const QuadButton = ({className, children, callback}: QuadButtonProps) => (
     {children}
     {fa.faLongArrowAltRight}
   </FAButton>
-)
+);
 
-export default function ResetButtons() {
+export default function ResetButtons (): JSX.Element {
+  const [, setScoreboard] = useScoreboard();
+
   const switchNames = () => {
-    Store.set((state: Scoreboard) => {
+    setScoreboard(state => {
       for (const key in state.players) {
-        const index = parseInt(key)
+        const index = parseInt(key);
 
-        if (index % 2 === 0)
-          continue
+        if (index % 2 === 0) { continue; }
 
-        const currentName = state.players[key].tag
-        const otherName = state.players[index - 1].tag
+        const currentName = state.players[key].tag;
+        const otherName = state.players[index - 1].tag;
 
-        state.players[index - 1].tag = currentName
-        state.players[key].tag = otherName
+        state.players[index - 1].tag = currentName;
+        state.players[key].tag = otherName;
       }
 
-      return state
-    })
-  }
+      return { ...state };
+    });
+  };
 
   const switchCharacters = () => {
-    Store.set((state: Scoreboard) => {
+    setScoreboard(state => {
       for (const key in state.players) {
-        const index = parseInt(key)
+        const index = parseInt(key);
 
-        if (index % 2 === 0)
-          continue
+        if (index % 2 === 0) { continue; }
 
-        const currentCharacter = state.players[key].character
-        const otherCharacter = state.players[index - 1].character
+        const currentCharacter = state.players[key].character;
+        const otherCharacter = state.players[index - 1].character;
 
-        state.players[index - 1].character = currentCharacter
-        state.players[key].character = otherCharacter
+        state.players[index - 1].character = currentCharacter;
+        state.players[key].character = otherCharacter;
       }
 
-      return state
-    })
-  }
+      return { ...state };
+    });
+  };
 
   const switchAll = () => {
-    Store.set((scoreboard: Scoreboard) => {
-      for (const key in scoreboard.players) {
-        const index = parseInt(key)
+    setScoreboard(state => {
+      for (const key in state.players) {
+        const index = parseInt(key);
 
-        if (index % 2 === 0)
-          continue
+        if (index % 2 === 0) { continue; }
 
-        const currentPlayer = scoreboard.players[key]
-        const otherPlayer = scoreboard.players[index - 1]
+        const currentPlayer = state.players[key];
+        const otherPlayer = state.players[index - 1];
 
-        scoreboard.players[index - 1] = currentPlayer
-        scoreboard.players[key] = otherPlayer
+        state.players[index - 1] = currentPlayer;
+        state.players[key] = otherPlayer;
       }
 
-      return scoreboard
-    })
-  }
+      return { ...state };
+    });
+  };
 
   const resetPlayersAndLevel = () => {
-    Store.set((scoreboard: Scoreboard) => {
-      scoreboard.players = [
+    setScoreboard(state => {
+      state.players = [
         new Player(""),
         new Player("")
-      ]
+      ];
 
-      scoreboard.level = new Level(
-        Brackets.pools,
-        Rounds.midRound
-      )
-
-      return scoreboard
-    })
-  }
+      return { ...state };
+    });
+  };
 
   return (
     <Fragment>
@@ -121,7 +111,7 @@ export default function ResetButtons() {
           <QuadButton className="bottom-left" callback={switchAll}>All</QuadButton>
         </Col>
         <Col>
-          {/*<QuadButton className="bottom-right" callback={reset}>Reset</QuadButton>*/}
+          {/* <QuadButton className="bottom-right" callback={reset}>Reset</QuadButton> */}
           <FAButton variant="dark" size="sm" block className="bottom-right" onClick={resetPlayersAndLevel}>
             {fa.faUndo}
             Reset
@@ -129,5 +119,5 @@ export default function ResetButtons() {
         </Col>
       </Row>
     </Fragment>
-  )
+  );
 }

@@ -1,23 +1,19 @@
-import React, {Fragment, useRef} from "react"
-import {ToggleButtonGroup, ToggleButton} from "react-bootstrap"
+import React, { Fragment, useRef } from "react";
+import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
-import {useStore} from "laco-react"
-import Store from "../../../store"
-
-import BorderRadius from "../../../elements/BorderRadius"
-import Scoreboard from "../../../model/Scoreboard"
-
-import Rounds, {class as Round} from "../../../model/Round"
+import BorderRadius from "../../../elements/BorderRadius";
+import Rounds, { class as Round } from "../../../model/Round";
+import { useScoreboard } from "../../../scoreboard-context";
 
 type RoundToggleButtonProps = {
   round: Round
   className: string
-  onChange: any
+  onChange: React.ChangeEventHandler<HTMLInputElement>
   currentRound: Round
 }
 
-const RoundToggleButton = ({round, className, onChange, currentRound}: RoundToggleButtonProps) => {
-  const target = useRef(null)
+const RoundToggleButton = ({ round, className, onChange, currentRound }: RoundToggleButtonProps) => {
+  const target = useRef(null);
 
   return (
     <td>
@@ -26,7 +22,9 @@ const RoundToggleButton = ({round, className, onChange, currentRound}: RoundTogg
         size="sm"
         value={round.code}
         checked={currentRound === round}
-        onChange={onChange}
+        onChange={(event) => {
+          onChange(event)
+        }}
         name="round"
         className={className}
         type="radio" // important
@@ -34,18 +32,18 @@ const RoundToggleButton = ({round, className, onChange, currentRound}: RoundTogg
         {round.short}
       </ToggleButton>
     </td>
-  )
-}
+  );
+};
 
-export default function RoundComponent() {
-  const scoreboard: Scoreboard = useStore(Store)
+export default function RoundComponent (): JSX.Element {
+  const [scoreboard, setScoreboard] = useScoreboard();
 
-  const changeRound = ({target}) => {
-    Store.set((state: Scoreboard) => {
-      state.level.round = Rounds[target.value]
-      return state
-    })
-  }
+  const changeRound = ({ target }) => {
+    setScoreboard(state => {
+      state.level.round = Rounds[target.value];
+      return { ...state };
+    });
+  };
 
   return (
     <Fragment>
@@ -88,5 +86,5 @@ export default function RoundComponent() {
         </table>
       </ToggleButtonGroup>
     </Fragment>
-  )
+  );
 }
