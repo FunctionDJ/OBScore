@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "strict": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["controller", "backend"]
+}

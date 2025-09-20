@@ -1,6 +1,0 @@
-export default {
-  "report-board-errors": false,
-  "game": "smash4",
-  "tooltips": true,
-  "max-score": 5
-}

@@ -1,9 +1,2 @@
 /node_modules/
-/.parcel-cache
-/dist
-
-# production
-/build/
-
-# ide
-/.vscode/
+/.env

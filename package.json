@@ -1,32 +1,42 @@
 {
   "name": "obscore",
-  "version": "0.1.0",
-  "description": "A platform fighter scoreboard controller",
-  "scripts": {
-    "start:host": "ts-node src/host/main",
-    "prebuild:host": "parcel build src/host/main.ts",
-    "build:host": "npm run prebuild:host && npm run nexe",
-    "nexe": "nexe dist/main.js",
-    "pkg": "pkg dist/main.js --targets node16-win-x64 --compress GZip"
-  },
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A fighting game scoreboard system",
   "repository": {
     "type": "git",
-    "url": "github:waffln/OBScore"
+    "url": "github:FunctionDJ/OBScore"
   },
-  "engines": {
-    "node": ">=14"
-  },
-  "author": "waffeln",
+  "author": "Function",
   "license": "MIT",
-  "bugs": "https://github.com/waffln/OBScore/issues",
-  "homepage": "https://github.com/waffln/OBScore",
+  "bugs": "https://github.com/FunctionDJ/OBScore/issues",
+  "homepage": "https://github.com/FunctionDJ/OBScore",
   "devDependencies": {
-    "@types/node": "^16.7.13",
-    "chalk": "^4.1.2",
-    "nexe": "^4.0.0-beta.19",
-    "parcel": "^2.2.1",
-    "pkg": "^5.5.2",
-    "socket.io": "^4.2.0",
-    "ts-node": "^10.4.0"
+    "@fortawesome/fontawesome-free": "^7.0.1",
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-brands-svg-icons": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
+    "@trpc/client": "^11.5.1",
+    "@types/bootstrap": "^5.2.10",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.0.3",
+    "bootstrap": "^5.3.8",
+    "bootswatch": "^5.3.8",
+    "font-awesome": "^4.7.0",
+    "react": "^19.1.1",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.1.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.5.1",
+    "tsx": "^4.20.5",
+    "vite": "^7.1.6",
+    "ws": "^8.18.3",
+    "zod": "^4.1.9"
   }
 }
