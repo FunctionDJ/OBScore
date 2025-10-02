@@ -1,7 +1,0 @@
-/node_modules/
-
-# parcel cache
-/.cache/
-
-# parcel dist files for development
-/dist/

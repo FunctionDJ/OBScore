@@ -1,0 +1,7 @@
+{
+  "useTabs": true,
+  "plugins": [
+    "prettier-plugin-classnames"
+  ],
+  "tailwindStylesheet": "./controller/tailwind.css"
+}

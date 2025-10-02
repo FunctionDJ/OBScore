@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+:root {
+	letter-spacing: 0.1em;
+}
+
+@font-face {
+	font-family: CalSans;
+	src: url("./CalSans-Regular.ttf");
+}
+
+@theme {
+	--font-sans: CalSans, sans-serif;
+}

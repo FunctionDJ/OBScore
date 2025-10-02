@@ -1,118 +1,68 @@
-import React, { FC } from "react";
-import { FormControl } from "react-bootstrap";
+import {
+	faArrowDown,
+	faArrowUp,
+	faUndo,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "./Button";
 
-import FAButton from "./FAButton";
-
-import { faArrowUp, faArrowDown, faUndo } from "@fortawesome/free-solid-svg-icons";
-
-import "./NumberController.scss";
-
-import BorderRadius from "./BorderRadius";
-
-type Props = {
-  value: number
-  defaultValue: number
-  onChange: (number: number) => void
-  min: number
-  max: number
-  reverse?: boolean
+interface Props {
+	value: number;
+	defaultValue: number;
+	onChange: (number: number) => void;
+	min: number;
+	max: number;
 }
 
-const FAButtonSharedClasses = "py-0 px-1 slim-button ";
+export const NumberController = ({
+	defaultValue,
+	max,
+	min,
+	onChange,
+	value,
+}: Props) => {
+	const increment = () => {
+		onChange(Math.min(value + 1, max));
+	};
 
-const NumberController: FC<Props> = (props) => {
-  const { value, defaultValue, onChange, min, max } = props;
-  const reverse = props.reverse || false;
+	const decrement = () => {
+		onChange(Math.max(value - 1, min));
+	};
 
-  const handleChange = ({ target }) => {
-    const number = parseInt(target.value, 10);
-    onChange(number);
-  };
-
-  const increment = () => {
-    onChange(Math.min(value + 1, max));
-  };
-
-  const decrement = () => {
-    onChange(Math.max(value - 1, min));
-  };
-
-  const reset = () => {
-    onChange(defaultValue);
-  };
-
-  const handleWheel = ({ deltaY }) => {
-    deltaY < 0 ? increment() : decrement();
-  };
-
-  return (
-    <div
-      className="d-flex"
-      onWheel={handleWheel}
-      style={{ flexDirection: reverse ? "row-reverse" : "row" }}
-    >
-      <FormControl
-        className={
-          reverse
-            ? `${BorderRadius.topRight} ${BorderRadius.bottomRight}`
-            : `${BorderRadius.topLeft} ${BorderRadius.bottomLeft}`
-        }
-        type="number"
-        value={
-          (value === undefined || value === null) ? "" : value.toString()
-        }
-        onChange={handleChange}
-        min={min.toString()}
-        max={max.toString()}
-        style={{
-          textAlign: "center",
-          width: 50,
-          fontSize: 30,
-          height: "100%",
-          borderColor: "black"
-        }}
-        size="sm"
-      />
-      <div className="d-flex flex-column">
-        <FAButton
-          variant="dark"
-          onMouseDown={increment}
-          size="sm"
-          className={
-            FAButtonSharedClasses + (
-              reverse
-                ? BorderRadius.topLeft
-                : BorderRadius.topRight
-            )
-          }
-        >
-          {[faArrowUp]}
-        </FAButton>
-        <FAButton
-          variant="dark"
-          onClick={reset}
-          size="sm"
-          className={FAButtonSharedClasses + BorderRadius.none}
-        >
-          {[faUndo]}
-        </FAButton>
-        <FAButton
-          variant="dark"
-          onMouseDown={decrement}
-          size="sm"
-          className={
-            FAButtonSharedClasses + (
-              reverse
-                ? BorderRadius.bottomLeft
-                : BorderRadius.bottomRight
-            )
-          }
-        >
-          {[faArrowDown]}
-        </FAButton>
-      </div>
-    </div>
-  );
+	return (
+		<div
+			className="flex rounded bg-black overflow-hidden"
+			onWheel={(e) => {
+				if (e.deltaY < 0) {
+					increment();
+				} else {
+					decrement();
+				}
+			}}
+		>
+			<input
+				className="[&::-webkit-inner-spin-button]:appearance-none
+					focus:outline-none text-center w-8 text-3xl"
+				type="number"
+				value={String(value)}
+				onChange={(e) => onChange(Number.parseInt(e.target.value, 10))}
+				min={min.toString()}
+				max={max.toString()}
+			/>
+			<div
+				className="flex flex-col bg-gray-950 *:grow *:w-10 *:border-transparent!
+					*:enabled:active:scale-90"
+			>
+				<Button onClick={increment}>
+					<FontAwesomeIcon icon={faArrowUp} />
+				</Button>
+				<Button onClick={() => onChange(defaultValue)}>
+					<FontAwesomeIcon icon={faUndo} />
+				</Button>
+				<Button onClick={decrement}>
+					<FontAwesomeIcon icon={faArrowDown} />
+				</Button>
+			</div>
+		</div>
+	);
 };
-
-export default NumberController;

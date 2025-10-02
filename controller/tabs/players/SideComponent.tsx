@@ -1,105 +1,55 @@
-import React, { CSSProperties } from "react";
-import { ButtonGroup, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
-
-import Scoreboard from "../../model/Scoreboard";
-import Side from "../../model/Side";
+import {
+	sides,
+	type Scoreboard,
+	type Side,
+} from "../../../backend/schemas/scoreboardSchema";
+import { Button } from "../../elements/Button";
 import { useScoreboard } from "../../scoreboard-context";
 
-function SideButton ({
-  value, active, onClick, label, tooltip
-}: {
-  value: string
-  active: boolean,
-  onClick: (Event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-  label: string,
-  tooltip: string
-}) {
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip id={value}>
-          {tooltip}
-        </Tooltip>
-      }
-    >
-      <Button
-        size="sm"
-        value={value}
-        active={active}
-        onClick={onClick}
-        name="side"
-        style={{
-          paddingTop: 3,
-          paddingBottom: 3,
-          minWidth: 30
-        }}
-        onFocus={
-          // disable the annoying lingering focus visual behaviour
-          ({ currentTarget }) => {
-            currentTarget.blur();
-          }
-        }
-      >
-        {label}
-      </Button>
-    </OverlayTrigger>
-  );
+interface Props {
+	playerIndex: number;
 }
 
-export default function SideComponent (
-  { playerIndex, style }:
-  {playerIndex: number, style: CSSProperties}
-): JSX.Element {
-  const [scoreboard, setScoreboard] = useScoreboard();
-  const { players } = scoreboard;
+export default function SideComponent({ playerIndex }: Props) {
+	const { scoreboard, setScoreboard } = useScoreboard();
+	const currentPlayer = scoreboard.players[playerIndex];
+	const isReset = scoreboard.level.bracket === "Grand Finals Reset";
 
-  const { side } = players[playerIndex];
+	const handleOnClick = (side: Side) => {
+		setScoreboard((draft) => {
+			const currentPlayerDraft = draft.players[playerIndex];
 
-  const handleOnClick = ({ target }) => {
-    setScoreboard((state: Scoreboard) => {
-      const currentPlayer = state.players[playerIndex];
-      const newSide: Side = Side[target.value];
+			if (currentPlayerDraft.side === side) {
+				currentPlayerDraft.side = null;
+			} else {
+				currentPlayerDraft.side = side;
+			}
 
-      // toggle functionality
-      if (currentPlayer.side === newSide) {
-        currentPlayer.side = undefined;
-        return state;
-      }
+			if (side === "Winners") {
+				draft.players[playerIndex === 0 ? 1 : 0].side = "Losers";
+			}
+		});
+	};
 
-      currentPlayer.side = newSide;
+	return (
+		<div className="flex gap-1 *:w-10">
+			{sides.map((side) => {
+				const active = isReset
+					? side === "Losers"
+					: currentPlayer.side === side;
 
-      // automatic switching of the other side only applies to player[0] and [1] for now
-      if (![0, 1].includes(playerIndex)) {
-        return state;
-      }
-
-      const otherPlayerIndex = playerIndex === 0 ? 1 : 0;
-      const otherPlayer = state.players[otherPlayerIndex];
-
-      if (newSide === "winners") {
-        otherPlayer.side = Side.losers;
-      }
-
-      return state;
-    });
-  };
-
-  return (
-    <ButtonGroup style={style}>
-      <SideButton
-        active={side === Side.winners}
-        label="W"
-        onClick={handleOnClick}
-        value="winners"
-        tooltip="Winners Side"
-      />
-      <SideButton
-        active={side === Side.losers}
-        label="L"
-        onClick={handleOnClick}
-        value="losers"
-        tooltip="Losers Side"
-      />
-    </ButtonGroup>
-  );
+				return (
+					<Button
+						disabled={scoreboard.level.bracket === "Grand Finals Reset"}
+						key={side}
+						onClick={() => handleOnClick(side)}
+						title={`${side} Side`}
+						active={active}
+					>
+						{side[0]}
+					</Button>
+				);
+			})}
+		</div>
+	);
 }

@@ -1,35 +1,41 @@
-import { useMemo, useState } from "react";
-import "./App.scss";
-import { CustomTabs } from "./CustomTabs";
-import Scoreboard from "./model/Scoreboard";
-import {
-  createScoreboard,
-  ScoreboardContext,
-  ScoreboardContextInt,
-} from "./scoreboard-context";
-import Meta from "./tabs/meta/Meta";
-import Players from "./tabs/players/Players";
+import { useEffect, useState } from "react";
+import "../shared/tailwind.css";
+import { trpcClient } from "../shared/trpcClient";
+import { useScoreboardBackend } from "../shared/useScoreboardBackend";
+import { Tabs, type Tab } from "./Tabs";
+import { ScoreboardContext } from "./scoreboard-context";
+import { Misc } from "./tabs/misc/Misc";
+import { Players } from "./tabs/players/Players";
 
 export function App() {
-  const [scoreboard, setScoreboard] = useState<Scoreboard>(createScoreboard());
+	const [scoreboard, setScoreboard] = useScoreboardBackend({
+		subscribe: false,
+	});
 
-  const contextValue = useMemo<ScoreboardContextInt>(
-    () => ({
-      scoreboard,
-      setScoreboard,
-    }),
-    [scoreboard, setScoreboard]
-  );
+	useEffect(() => {
+		const handler = setTimeout(() => {
+			if (scoreboard.state === "dirty") {
+				trpcClient.update.mutate(scoreboard);
+			}
+		}, 500);
 
-  const [tab, setTab] = useState("players");
+		return () => clearTimeout(handler);
+	}, [scoreboard]);
 
-  return (
-    <ScoreboardContext.Provider value={contextValue}>
-      <CustomTabs tab={tab} setTab={setTab} />
-      <div className="tab-content" id="nav-tabContent">
-        {tab === "players" && <Players />}
-        {tab === "meta" && <Meta />}
-      </div>
-    </ScoreboardContext.Provider>
-  );
+	const [currentTab, setCurrentTab] = useState<Tab>("players");
+
+	return (
+		<ScoreboardContext.Provider
+			value={{
+				scoreboard,
+				setScoreboard,
+			}}
+		>
+			<Tabs currentTab={currentTab} setCurrentTab={setCurrentTab} />
+			<div className="px-1">
+				{currentTab === "players" && <Players />}
+				{currentTab === "misc" && <Misc />}
+			</div>
+		</ScoreboardContext.Provider>
+	);
 }

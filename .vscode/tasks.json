@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run backend/main.ts with tsx",
+			"type": "shell",
+			"command": "pnpm tsx --watch backend/main.ts"
+		},
+		{
+			"label": "Run frontend with vite",
+			"type": "shell",
+			"command": "pnpm vite"
+		},
+		{
+			"label": "Run both backend and frontend",
+			"type": "shell",
+			"dependsOn": ["Run frontend with vite", "Run backend/main.ts with tsx"],
+			"dependsOrder": "parallel"
+		}
+	]
+}

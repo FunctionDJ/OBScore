@@ -1,13 +1,14 @@
 {
-  "compilerOptions": {
-    "target": "es2024",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "strict": true,
-    "module": "esnext",
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["controller", "backend"]
+	"compilerOptions": {
+		"target": "es2024",
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"skipLibCheck": true,
+		"strict": true,
+		"module": "esnext",
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"jsx": "react-jsx"
+	},
+	"include": ["controller", "backend", "scoreboard", "shared"]
 }

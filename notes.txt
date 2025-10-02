@@ -1,1 +1,18 @@
 - wenn man den controller baut, hat die resultierende HTML absolute pfade mit `/static`, was bei file:/// den shit kaputt macht. muss relativ sein.
+
+- build/run script bauen (vite build, tsc backend, run backend, log URLs)
+
+- character fuzzy/autocomplete
+- message feature ("be right back" etc)
+- pronouns?
+- tatächliches deployment auf g5 testen
+- stream diagram vervollständigen
+
+future:
+- track connectivity in controller, refetch scoreboard if reconnecting
+- scoreboard settings für bar width, middle width, font size, usw.
+- melee, P+, rivals support, melee layout
+- API für streamdeck
+- attendee autocomplete / fetch from start.gg
+- better "side" system that only allows valid states, like 1x winner and 1x loser in GF, but keep allowing "no side" / toggle off, but also dont allow both losers as that is GFR
+- level/sets ganz neu denken mit "top 16" / "top 64" und so

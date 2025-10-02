@@ -1,123 +1,83 @@
-import React, { Fragment, ReactNode } from "react";
-import { Row, Col } from "react-bootstrap";
-import FAButton from "../../../elements/FAButton";
-import * as fa from "@fortawesome/free-solid-svg-icons";
-import "../../../elements/BorderRadius.scss";
-import "./ResetButtons.scss";
-
-import Player from "../../../model/Player";
+import {
+	faLongArrowAltLeft,
+	faLongArrowAltRight,
+	faUndo,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "../../../elements/Button";
 import { useScoreboard } from "../../../scoreboard-context";
 
-type QuadButtonProps = {
-  className: string,
-  children: ReactNode,
-  callback: () => void
-}
+export const ResetButtons = () => {
+	const { setSBClick, setScoreboard } = useScoreboard();
 
-const QuadButton = ({ className, children, callback }: QuadButtonProps) => (
-  <FAButton
-    variant="dark"
-    size="sm"
-    block
-    className={className}
-    onClick={callback}
-  >
-    {fa.faLongArrowAltLeft}
-    {children}
-    {fa.faLongArrowAltRight}
-  </FAButton>
-);
+	return (
+		<div className="grid grid-cols-2 gap-2 *:w-32">
+			<Button
+				onClick={setSBClick(({ players }) => {
+					const leftTag = players[0].tag;
+					const leftSponsor = players[0].sponsor;
 
-export default function ResetButtons (): JSX.Element {
-  const [, setScoreboard] = useScoreboard();
+					players[0].tag = players[1].tag;
+					players[0].sponsor = players[1].sponsor;
+					players[1].tag = leftTag;
+					players[1].sponsor = leftSponsor;
+				})}
+			>
+				<FontAwesomeIcon icon={faLongArrowAltLeft} />
+				Name
+				<FontAwesomeIcon icon={faLongArrowAltRight} />
+			</Button>
+			<Button
+				onClick={setSBClick(({ players }) => {
+					const leftChar = players[0].character;
+					players[0].character = players[1].character;
+					players[1].character = leftChar;
+				})}
+			>
+				<FontAwesomeIcon icon={faLongArrowAltLeft} />
+				Char
+				<FontAwesomeIcon icon={faLongArrowAltRight} />
+			</Button>
+			<Button
+				onClick={setSBClick(({ players }) => {
+					const leftPlayer = players[0];
+					players[0] = players[1];
+					players[1] = leftPlayer;
+				})}
+			>
+				<FontAwesomeIcon icon={faLongArrowAltLeft} />
+				All
+				<FontAwesomeIcon icon={faLongArrowAltRight} />
+			</Button>
+			<Button
+				onClick={() => {
+					if (!window.confirm("Are you sure you want to reset players?")) {
+						return;
+					}
 
-  const switchNames = () => {
-    setScoreboard(state => {
-      for (const key in state.players) {
-        const index = parseInt(key);
-
-        if (index % 2 === 0) { continue; }
-
-        const currentName = state.players[key].tag;
-        const otherName = state.players[index - 1].tag;
-
-        state.players[index - 1].tag = currentName;
-        state.players[key].tag = otherName;
-      }
-
-      return { ...state };
-    });
-  };
-
-  const switchCharacters = () => {
-    setScoreboard(state => {
-      for (const key in state.players) {
-        const index = parseInt(key);
-
-        if (index % 2 === 0) { continue; }
-
-        const currentCharacter = state.players[key].character;
-        const otherCharacter = state.players[index - 1].character;
-
-        state.players[index - 1].character = currentCharacter;
-        state.players[key].character = otherCharacter;
-      }
-
-      return { ...state };
-    });
-  };
-
-  const switchAll = () => {
-    setScoreboard(state => {
-      for (const key in state.players) {
-        const index = parseInt(key);
-
-        if (index % 2 === 0) { continue; }
-
-        const currentPlayer = state.players[key];
-        const otherPlayer = state.players[index - 1];
-
-        state.players[index - 1] = currentPlayer;
-        state.players[key] = otherPlayer;
-      }
-
-      return { ...state };
-    });
-  };
-
-  const resetPlayersAndLevel = () => {
-    setScoreboard(state => {
-      state.players = [
-        new Player(""),
-        new Player("")
-      ];
-
-      return { ...state };
-    });
-  };
-
-  return (
-    <Fragment>
-      <Row className="no-gutters">
-        <Col>
-          <QuadButton className="top-left" callback={switchNames}>Name</QuadButton>
-        </Col>
-        <Col>
-          <QuadButton className="top-right" callback={switchCharacters}>Char</QuadButton>
-        </Col>
-      </Row>
-      <Row className="no-gutters">
-        <Col>
-          <QuadButton className="bottom-left" callback={switchAll}>All</QuadButton>
-        </Col>
-        <Col>
-          {/* <QuadButton className="bottom-right" callback={reset}>Reset</QuadButton> */}
-          <FAButton variant="dark" size="sm" block className="bottom-right" onClick={resetPlayersAndLevel}>
-            {fa.faUndo}
-            Reset
-          </FAButton>
-        </Col>
-      </Row>
-    </Fragment>
-  );
-}
+					setScoreboard((draft) => {
+						draft.players = [
+							{
+								tag: "",
+								character: null,
+								score: 0,
+								sponsor: "",
+								side: null,
+							},
+							{
+								tag: "",
+								character: null,
+								score: 0,
+								sponsor: "",
+								side: null,
+							},
+						];
+					});
+				}}
+			>
+				<FontAwesomeIcon icon={faUndo} />
+				Reset
+			</Button>
+		</div>
+	);
+};
